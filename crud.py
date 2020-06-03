@@ -32,6 +32,18 @@ def create_measure_rating(score):
 
     return measure_rating
 
+def create_rating(overall_score, clinic, user):
+    """Create and return a new rating"""
+
+    rating = Rating(overall_score, 
+                    user=user, 
+                    clinic=clinic)
+    
+    db.session.add(rating)
+    db.session.commit()
+
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
