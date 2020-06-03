@@ -1,6 +1,6 @@
 """ Models for covid app."""
 
-from flask_sqlalchemy import flask_sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
@@ -33,7 +33,7 @@ class Clinic(db.Model):
     clinic_key = db.Column(db.String)
 
     def __repr__(self):
-        return f'<Clinic clinic_id{self.clinic_id} name={self.name}>'
+        return f'<Clinic clinic_id={self.clinic_id} name={self.name}>'
 
 
 class Measure(db.Model):
@@ -47,18 +47,21 @@ class Measure(db.Model):
     measure = db.Column(db.String, unique=True)
     max_score = db.Column(db.Integer)
 
+    def __repr__(self):
+        return f'<Measure measure_code={self.measure_code} max_score={self.max_score}>'
+
 
 class Measure_Rating(db.Model):
-     """A measure rating."""
+    """A measure rating."""
 
-     __tablename__ = 'measure_ratings'
+    __tablename__ = 'measure_ratings'
 
     id = db.Column(db.Integer,
                     primary_key=True,
                     autoincrement=True)
     score = db.Column(db.Integer)
     rating_id = db.Column(db.Integer,
-                        db.ForeignKey('ratings.ratings_id'))
+                        db.ForeignKey('ratings.rating_id'))
     measure_code = db.Column(db.String,
                         db.ForeignKey('measures.measure_code'))
 
@@ -91,7 +94,7 @@ class Rating(db.Model):
 
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///covid_rating', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
