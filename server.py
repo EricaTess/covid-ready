@@ -26,9 +26,9 @@ def view_map():
     return render_template('map.html')
 
 
-@app.route("/static/<path:resource>")
-def get_resource(resource):
-    return send_from_directory("static", resource)
+# @app.route("/map/static/<path:resource>")
+# def get_resource(resource):
+#     return send_from_directory("static", resource)
 
 
 if __name__ == '__main__':

@@ -2,11 +2,14 @@
 {% block title %}Clinic Locator{% endblock %}
 
 {% block head %}
-<script src="/static/js/maps.js"></script>
-    <script
-        async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhNlRQ6y6ifxlPFtqAYFb5qPI29Ul_pgo&callback=initMap">
-    </script>
+<link rel="stylesheet" href="static/css/maps.css"/>
+<script src="static/js/maps.js"></script>
+
+
+<script 
+    async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&callback=initMap&libraries=places">
+</script>
 
 {% endblock %}
 
@@ -24,5 +27,6 @@
       <div id="map"></div>
     </section>
   </main>
+
   
 {% endblock %}
