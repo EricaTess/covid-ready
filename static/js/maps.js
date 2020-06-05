@@ -43,7 +43,7 @@ function initMap() {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
           createMarker(results[i]);
-          console.log(results[i].name);
+          // console.log(results[i].name);
         }
       }
       // console.log(results);
@@ -51,31 +51,41 @@ function initMap() {
 }
 
 function createMarker(place) {
+
     const bounds = new google.maps.LatLngBounds();
     const placesList = document.getElementById('places');
 
-    for (var i = 0, place; place = places[i]; i++) {
-        var image = {
-            url: place.icon,
-            size: new google.maps.Size(71,71),
-            origin: new google.maps.Point(0,0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-        };
 
-        const marker = new google.maps.Marker({
-          map: map,
-          icon: image,
-          title: place.name,
-          position: place.geometry.location
-        });
+    const marker = new google.maps.Marker({
+        position: place.geometry.location,
+        title: place.name
+    });
 
-        const li = document.createElement('li');
-        li.textContent = place.name;
-        placesList.appendChild(li);
+    console.log(marker);
 
-        bounds.extend(place.geometry.location);
+    marker.setMap(map);
 
-        map.fitBounds(bounds);
-    }
+        // var image = {
+        //     url: place.icon,
+        //     size: new google.maps.Size(71,71),
+        //     origin: new google.maps.Point(0,0),
+        //     anchor: new google.maps.Point(17, 34),
+        //     scaledSize: new google.maps.Size(25, 25)
+        // };
+
+        // const marker = new google.maps.Marker({
+        //   map: map,
+        //   icon: image,
+        //   title: place.name,
+        //   position: place.geometry.location
+        // });
+
+        // const li = document.createElement('li');
+        // li.textContent = place.name;
+        // placesList.appendChild(li);
+
+        // bounds.extend(place.geometry.location);
+
+        // map.fitBounds(bounds);
+
 }
