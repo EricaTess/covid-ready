@@ -13,13 +13,17 @@ function initMap() {
     zoom: 15
   });
 
+  // One look up medical clinic
   const request = {
     query: 'medical clinic',
     radius: 500,
     location: sfCoords
   };
 
+  //Create Info Window
   infoWindow = new google.maps.InfoWindow();
+
+  // Create Google Places
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
 
@@ -38,11 +42,15 @@ function createMarker(place) {
 
     const marker = new google.maps.Marker({
         position: place.geometry.location,
-        title: place.name,
+        title: place.name
     });
 
     marker.setMap(map);
 
+    marker.addListener('click', () => {
+        infoWindow.setContent(place.name)
+        infoWindow.open(map, marker);
+    });
 
     const li = document.createElement('li');
     li.textContent = place.name;
