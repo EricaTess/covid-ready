@@ -1,6 +1,7 @@
   
 """Server for covid app."""
 
+import time
 from flask import (Flask, render_template, request, flash, session, redirect, send_from_directory, jsonify)
 from model import connect_to_db
 from jinja2 import StrictUndefined
@@ -26,9 +27,8 @@ def view_map():
     return render_template('map.html')
 
 
-# @app.route("/map/static/<path:resource>")
-# def get_resource(resource):
-#     return send_from_directory("static", resource)
+
+
 
 
 if __name__ == '__main__':

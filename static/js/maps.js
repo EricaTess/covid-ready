@@ -26,23 +26,28 @@ function initMap() {
   // Create Google Places
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
+  service.getDetails(request, callback);
 
   function callback(results, status) {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
           createMarker(results[i]);
+          // getDetails(results[i]);
         }
       }
   }  
 }
 
 function createMarker(place) {
-
+    console.log(place);
     const placesList = document.getElementById('places');
 
     const marker = new google.maps.Marker({
-        position: place.geometry.location,
-        title: place.name
+        map: map,
+        place: {
+            placeId: place.place_id,
+            location: place.geometry.location
+        }
     });
 
     marker.setMap(map);
@@ -52,8 +57,21 @@ function createMarker(place) {
         infoWindow.open(map, marker);
     });
 
+    //List of places
     const li = document.createElement('li');
     li.textContent = place.name;
     placesList.appendChild(li);
 
 }
+
+// function getDetails(place) {
+
+//     const request = {
+//         placeId: place.place_id,
+//         fields: ['name', 'photo', 'formatted_phone_number', 'formatted_address', 'url']
+//     }
+
+// }
+
+
+
