@@ -57,6 +57,8 @@ function createMarker(place) {
         infoWindow.open(map, marker);
     });
 
+    //NEED TO ADD MORE DETAILS TO EACH MARKER
+
     //List of places
     const li = document.createElement('li');
     li.textContent = place.name;
