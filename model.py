@@ -30,7 +30,7 @@ class Clinic(db.Model):
                         primary_key=True,
                         autoincrement=True)
     name = db.Column(db.String)
-    clinic_key = db.Column(db.String)
+    clinic_key = db.Column(db.String, unique=True)
 
     def __repr__(self):
         return f'<Clinic clinic_id={self.clinic_id} name={self.name}>'

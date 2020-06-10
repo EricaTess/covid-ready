@@ -15,7 +15,7 @@ def create_user(username, email, password):
 def create_measure(measure, max_score):
     """Create a new measure."""
 
-    measure = Measure(measure=measure, max_score)
+    measure = Measure(measure=measure, max_score=max_score)
 
     db.session.add(measure)
     db.session.commit()
@@ -40,6 +40,14 @@ def create_rating(overall_score, clinic, user):
                     clinic=clinic)
     
     db.session.add(rating)
+    db.session.commit()
+
+def create_clinic(name, clinic_key):
+    """Create a clinic instance"""
+
+    clinic = Clinic(name=name, clinic_key=clinic_key)
+
+    db.session.add(clinic)
     db.session.commit()
 
 
