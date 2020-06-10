@@ -37,7 +37,12 @@ export default class GoogleMap extends Component {
         lat: 37.7749,
         lng: -122.4194
       },
-      disableDefaultUI: false,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false
       });
 
     return map;
@@ -49,15 +54,15 @@ export default class GoogleMap extends Component {
       query: 'medical clinic',
       location: this.state.currentLocation
     };
-    console.log('places created');
 
     const infoWindow = new window.google.maps.InfoWindow();
 
+    //Add markers and window info to each clinic
     const callback = (results, status) => {
-      console.log('in callback')
+
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
-          console.log(results[i].name);
+          // console.log(results[i].name);
     
           const marker = new window.google.maps.Marker({
             position: { lat: results[i].geometry.location.lat(),
@@ -71,57 +76,22 @@ export default class GoogleMap extends Component {
         }
       }
     }
-    // const infoWindow = new window.google.maps.InfoWindow(this.googleMap);
 
     //Create the places service.
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
   }
-
-
-
-  // createMarker(place) {
-  //     console.log(place);
-
-  //     const marker = new window.google.maps.Marker({
-  //       map: this.googleMap,
-  //       place: {
-  //           placeId: place.place_id,
-  //           location: place.geometry.location
-  //       }
-  //     });
-
-  //     marker.setMap(this.googleMap);
-
-  //   // marker.addListener('click', () => {
-  //   //     infoWindow.setContent(place.name)
-  //   //     infoWindow.open(this.googleMap, marker);
-  //   // });
-
-  //   //NEED TO ADD MORE DETAILS TO EACH MARKER
-
-  //   //List of places
-  //   // const li = document.createElement('li');
-  //   // li.textContent = place.name;
-  //   // placesList.appendChild(li);
-
-  // }
-
- 
-    
-
-
   
 
   render() {
     return (
-      // <div>
+      <div>
         <div
           id="map"
           ref={this.googleMapRef}
-          style={{ width: '400px', height: '400px' }}
+          style={{ width: '600px', height: '400px' }}
         />
-      // </div>  
+      </div>  
     )
   }
 }
