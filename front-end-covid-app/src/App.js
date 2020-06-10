@@ -2,11 +2,12 @@ import React, { Component, createRef } from 'react'
 
 // import CurrentLocation from './components/CurrentLocation'
 
-// const results = [];
+const placesList = [];
 
 export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
+    // this.marker = this.createMarker.bind(this)
     this.state = {
       markers: [],
       currentLocation: {
@@ -14,6 +15,9 @@ export default class GoogleMap extends Component {
         lng: -122.4194
       }
     };
+
+    // this.createPlaces = this.createPlaces.bind(this);
+    // this.createMarker = this.createMarker.bind(this)
     this.googleMapRef = React.createRef();
   }
 
@@ -25,20 +29,25 @@ export default class GoogleMap extends Component {
 
     googleMapScript.addEventListener("load", () => {
       this.googleMap = this.createGoogleMap();
-      // this.marker = this.createMarker();
+      console.log(this.googleMap);
+      // this.markers = this.createMarker();
       this.places = this.createPlaces();
     });
   }
 
-  createGoogleMap = () =>
-    new window.google.maps.Map(this.googleMapRef.current, {
+  createGoogleMap = () => {
+    const map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 14,
       center: {
         lat: 37.7749,
         lng: -122.4194
       },
-      disableDefaultUI: true,
-  });
+      disableDefaultUI: false,
+      });
+    console.log('map created')
+
+    return map;
+  }
 
 
   // getClinics = () => {
@@ -76,25 +85,50 @@ export default class GoogleMap extends Component {
 
 
 
-  createPlaces() {
+  createPlaces = () => { 
 
     const request = {
       query: 'medical clinic'
     };
+    console.log('places created');
+    
 
+    const callback = (results, status) => {
+      console.log('in callback')
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < results.length; i++) {
+          console.log(results[i].geometry.location.lat());
+          // placesList.push(results[i]);
+          // createMarker(results[i]);
+          new window.google.maps.Marker({
+            position: { lat: results[i].geometry.location.lat(),
+                         lng: results[i].geometry.location.lng() },
+            map: this.googleMap
+          })
+        }
+      }
+      // console.log(placesList);
+    }
+    console.log(this.googleMap);
     // const infoWindow = new window.google.maps.InfoWindow(this.googleMap);
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
-
-    function callback(results, status) {
-      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          console.log(results[i].geometry.location);
-          // this.createMarker(results[i]);
-        }
-      }
-    }
   }
+
+  // createMarker = () =>
+  //   new window.google.maps.Marker({
+  //     position: { lat: 43.642567, lng: -79.387054 },
+  //     map: this.googleMap,
+  //   })
+
+  // createMarker() {
+  //   console.log(placesList);
+  //   placesList.map(new window.google.maps.Marker({
+  //       position: { placesList.geometry.location },
+  //       map: this.googleMap
+  //     })
+  //   )
+  // }
 
   // createMarker(place) {
   //     console.log(place);
@@ -137,7 +171,6 @@ export default class GoogleMap extends Component {
           ref={this.googleMapRef}
           style={{ width: '400px', height: '400px' }}
         />
-        // <CurrentLocation />
       // </div>  
     )
   }
