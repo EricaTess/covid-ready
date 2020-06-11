@@ -33,10 +33,8 @@ export default class GoogleMap extends Component {
   }
 
   getGeoLocation = () => {
-    console.log('geolocation')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords);
         this.setState(prevState => ({
           currentLocation: {
             lat: position.coords.latitude,
@@ -44,10 +42,7 @@ export default class GoogleMap extends Component {
           }
         }))
       })
-      console.log('in geolocation', this.state.currentLocation)
-      
     }
-    console.log('in geolocation', this.state.currentLocation)
   }
 
   // Create the map.
@@ -62,7 +57,6 @@ export default class GoogleMap extends Component {
       rotateControl: false,
       fullscreenControl: false
       });
-    console.log('in createGM', this.state.currentLocation)
     return map;
   }
 
