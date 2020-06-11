@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react'
-
+import { Router, Route, Switch } from "react-router";
 
 
 const placesList = [];
@@ -26,6 +26,7 @@ export default class GoogleMap extends Component {
     googleMapScript.addEventListener("load", () => {
       this.googleMap = this.createGoogleMap();
       this.places = this.createPlaces();
+      // this.search = this.createSearchBox();
     });
   }
 
@@ -52,7 +53,8 @@ export default class GoogleMap extends Component {
 
     const request = {
       query: 'medical clinic',
-      location: this.state.currentLocation
+      location: this.state.currentLocation,
+      radius: 500
     };
 
     const infoWindow = new window.google.maps.InfoWindow();
@@ -62,6 +64,8 @@ export default class GoogleMap extends Component {
 
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
+
+          // fetch()
           // console.log(results[i].name);
     
           const marker = new window.google.maps.Marker({
@@ -81,6 +85,18 @@ export default class GoogleMap extends Component {
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
   }
+
+  // createSearchBox = () => {
+  //   const input = document.getElementById('pac-input');
+  //   const searchBox = new window.google.maps.places.SearchBox(input);
+
+  //   this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  //   this.googleMap.addListener('bounds_changed', function() {
+  //     searchBox.setBounds(this.googleMap.getCenter());
+  //   });
+  //   return searchBox;
+  // }
   
 
   render() {
@@ -90,6 +106,9 @@ export default class GoogleMap extends Component {
           id="map"
           ref={this.googleMapRef}
           style={{ width: '600px', height: '400px' }}
+        />
+        <div
+          id="pac-input"
         />
       </div>  
     )
