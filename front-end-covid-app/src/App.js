@@ -104,7 +104,7 @@ export default class GoogleMap extends Component {
     this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
 
     this.googleMap.addListener('bounds_changed', function() {
-      searchBox.setBounds(this.googleMap.getBounds());
+      // searchBox.setBounds(this.googleMap.getBounds());
     });
     return searchBox;
   }
