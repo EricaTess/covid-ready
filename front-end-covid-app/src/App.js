@@ -28,7 +28,6 @@ export default class GoogleMap extends Component {
       this.googleMap = this.createGoogleMap();
       this.places = this.createPlaces();
       this.search = this.createSearchBox();
-
     });
   }
 
@@ -99,14 +98,39 @@ export default class GoogleMap extends Component {
 
   createSearchBox = () => {
     const input = document.getElementById('pac-input');
-    const searchBox = new window.google.maps.places.SearchBox(input);
+    const autocomplete = new window.google.maps.places.Autocomplete(input);
 
-    this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
+    this.googleMap.controls[window.google.maps.ControlPosition.TOP_CENTER].push(input);
 
-    this.googleMap.addListener('bounds_changed', function() {
-      // searchBox.setBounds(this.googleMap.getBounds());
+    autocomplete.bindTo('bounds', this.googleMap);
+  // Set the data fields to return when the user selects a place.
+    autocomplete.setFields(
+    ['address_components', 'geometry', 'name']);
+
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      console.log(place)
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      const bounds = new window.google.maps.LatLngBounds();
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+      // this.setState(prevState => ({
+      //     currentLocation: {
+      //       lat: place.geometry.location.lat(),
+      //       lng: place.geometry.location.lng()
+      //     }
+      // }))
+      this.googleMap.fitBounds(bounds);
     });
-    return searchBox;
   }
   
 
