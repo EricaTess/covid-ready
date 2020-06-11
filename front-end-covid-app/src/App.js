@@ -64,7 +64,7 @@ export default class GoogleMap extends Component {
     const request = {
       query: 'medical clinic',
       location: this.state.currentLocation,
-      radius: 500
+      radius: 1000
     };
 
     const infoWindow = new window.google.maps.InfoWindow();
@@ -123,12 +123,13 @@ export default class GoogleMap extends Component {
       } else {
         bounds.extend(place.geometry.location);
       }
-      // this.setState(prevState => ({
-      //     currentLocation: {
-      //       lat: place.geometry.location.lat(),
-      //       lng: place.geometry.location.lng()
-      //     }
-      // }))
+      this.setState(prevState => ({
+          currentLocation: {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          }
+      }))
+      this.createPlaces();
       this.googleMap.fitBounds(bounds);
     });
   }
