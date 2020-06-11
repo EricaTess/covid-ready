@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react'
 import { Router, Route, Switch } from "react-router";
 
 
-const placesList = [];
+// const placesList = [];
 
 export default class GoogleMap extends Component {
   constructor(props) {
@@ -22,22 +22,39 @@ export default class GoogleMap extends Component {
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&libraries=places`;
     window.document.body.appendChild(googleMapScript);
     // this.getClinics()
-
+    this.geolocation = this.getGeoLocation();
     googleMapScript.addEventListener("load", () => {
+      // this.geolocation = this.getGeoLocation();
       this.googleMap = this.createGoogleMap();
       this.places = this.createPlaces();
       // this.search = this.createSearchBox();
+
     });
+  }
+
+  getGeoLocation = () => {
+    console.log('geolocation')
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords);
+        this.setState(prevState => ({
+          currentLocation: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+        }))
+      })
+      console.log('in geolocation', this.state.currentLocation)
+      
+    }
+    console.log('in geolocation', this.state.currentLocation)
   }
 
   // Create the map.
   createGoogleMap = () => {
     const map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 14,
-      center: {
-        lat: 37.7749,
-        lng: -122.4194
-      },
+      center: this.state.currentLocation,
       zoomControl: true,
       mapTypeControl: false,
       scaleControl: true,
@@ -45,7 +62,7 @@ export default class GoogleMap extends Component {
       rotateControl: false,
       fullscreenControl: false
       });
-
+    console.log('in createGM', this.state.currentLocation)
     return map;
   }
 
@@ -92,9 +109,9 @@ export default class GoogleMap extends Component {
 
   //   this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  //   this.googleMap.addListener('bounds_changed', function() {
-  //     searchBox.setBounds(this.googleMap.getCenter());
-  //   });
+  //   // this.googleMap.addListener('bounds_changed', function() {
+  //   //   searchBox.setBounds(this.googleMap.getCenter());
+  //   // });
   //   return searchBox;
   // }
   
@@ -109,6 +126,7 @@ export default class GoogleMap extends Component {
         />
         <div
           id="pac-input"
+          // ref={this.googleMapRef}
         />
       </div>  
     )
