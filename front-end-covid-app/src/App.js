@@ -21,13 +21,13 @@ export default class GoogleMap extends Component {
     const googleMapScript = document.createElement("script");
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&libraries=places`;
     window.document.body.appendChild(googleMapScript);
-    // this.getClinics()
+
     this.geolocation = this.getGeoLocation();
     googleMapScript.addEventListener("load", () => {
-      // this.geolocation = this.getGeoLocation();
+
       this.googleMap = this.createGoogleMap();
       this.places = this.createPlaces();
-      // this.search = this.createSearchBox();
+      this.search = this.createSearchBox();
 
     });
   }
@@ -97,30 +97,32 @@ export default class GoogleMap extends Component {
     service.textSearch(request, callback);
   }
 
-  // createSearchBox = () => {
-  //   const input = document.getElementById('pac-input');
-  //   const searchBox = new window.google.maps.places.SearchBox(input);
+  createSearchBox = () => {
+    const input = document.getElementById('pac-input');
+    const searchBox = new window.google.maps.places.SearchBox(input);
 
-  //   this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
+    this.googleMap.controls[window.google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  //   // this.googleMap.addListener('bounds_changed', function() {
-  //   //   searchBox.setBounds(this.googleMap.getCenter());
-  //   // });
-  //   return searchBox;
-  // }
+    this.googleMap.addListener('bounds_changed', function() {
+      searchBox.setBounds(this.googleMap.getBounds());
+    });
+    return searchBox;
+  }
   
 
   render() {
     return (
       <div>
+        <input
+          type='text'
+          id="pac-input"
+          placeholder="Search Box"
+          // ref={this.googleMapRef}
+        />
         <div
           id="map"
           ref={this.googleMapRef}
           style={{ width: '600px', height: '400px' }}
-        />
-        <div
-          id="pac-input"
-          // ref={this.googleMapRef}
         />
       </div>  
     )
