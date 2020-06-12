@@ -84,9 +84,15 @@ export default class GoogleMap extends Component {
             map: this.googleMap,
           })
           marker.addListener('click', () => {
-            infoWindow.setContent(results[i].name)
+            infoWindow.setContent(`<div>
+                <h3>${results[i].name}</h3>
+                <p>
+                  ${results[i].formatted_address}<br>
+                <p>
+              </div>`)
             infoWindow.open(this.googleMap, marker);
           });
+          console.log('results', results[i]);
         }
       }
     }
