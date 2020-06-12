@@ -23,3 +23,20 @@ code {
     text-overflow: ellipsis;
     width: 400px;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 271px;
+  width: 200px;
+  overflow-y: scroll;
+}
+
+li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

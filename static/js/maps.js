@@ -16,7 +16,7 @@ function initMap() {
   // One look up medical clinic
   const request = {
     query: 'medical clinic',
-    radius: 500,
+    // radius: 100,
     location: sfCoords
   };
 

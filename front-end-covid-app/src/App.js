@@ -64,7 +64,7 @@ export default class GoogleMap extends Component {
     const request = {
       query: 'medical clinic',
       location: this.state.currentLocation,
-      radius: 1000
+      radius: 500
     };
 
     const infoWindow = new window.google.maps.InfoWindow();
@@ -87,12 +87,30 @@ export default class GoogleMap extends Component {
             infoWindow.setContent(`<div>
                 <h3>${results[i].name}</h3>
                 <p>
-                  ${results[i].formatted_address}<br>
+                  ${results[i].formatted_address}
                 <p>
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });
-          console.log('results', results[i]);
+
+          //Create list with details
+          const detailsRequest = {
+            placeId: results[i].place_id,
+            fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
+          }
+
+          const callback = (place, status) => {
+            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+              console.log(place);
+              const clinicList = document.getElementById('clinics');
+              const li = document.createElement('li');
+              li.textContent = place.name;
+              clinicList.appendChild(li);
+            }
+          }
+          
+          service.getDetails(detailsRequest, callback);
+
         }
       }
     }
@@ -144,17 +162,25 @@ export default class GoogleMap extends Component {
   render() {
     return (
       <div>
-        <input
-          type='text'
-          id="pac-input"
-          placeholder="Search Box"
-          // ref={this.googleMapRef}
-        />
-        <div
-          id="map"
-          ref={this.googleMapRef}
-          style={{ width: '600px', height: '400px' }}
-        />
+        <div>
+          <input
+            type='text'
+            id="pac-input"
+            placeholder="Search Box"
+
+          />
+          <div
+            id="map"
+            ref={this.googleMapRef}
+            style={{ width: '600px', height: '400px' }}
+          />
+        </div> 
+        <div>
+        CLINICS
+          <ul id="clinics">
+
+          </ul>
+        </div>
       </div>  
     )
   }
