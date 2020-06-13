@@ -25,3 +25,7 @@ for clinic in places_result['results']:
     print(name, clinic_key)
     db_clinic = crud.create_clinic(name, clinic_key)
     list_of_clinics.append(db_clinic)
+
+if __name__ == '__main__':
+    connect_to_db(app)
+    with app.app_context():

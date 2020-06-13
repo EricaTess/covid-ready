@@ -40,3 +40,7 @@ li {
   white-space: nowrap;
   overflow: hidden;
 }
+
+li:nth-child(odd) {
+  background-color: #fcfcfc;
+}

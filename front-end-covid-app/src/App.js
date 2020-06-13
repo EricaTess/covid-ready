@@ -26,8 +26,9 @@ export default class GoogleMap extends Component {
     googleMapScript.addEventListener("load", () => {
 
       this.googleMap = this.createGoogleMap();
-      this.places = this.createPlaces();
       this.search = this.createSearchBox();
+      this.places = this.createPlaces();
+      
     });
   }
 
@@ -57,6 +58,44 @@ export default class GoogleMap extends Component {
       fullscreenControl: false
       });
     return map;
+  }
+
+  createSearchBox = () => {
+    const input = document.getElementById('pac-input');
+    const autocomplete = new window.google.maps.places.Autocomplete(input);
+
+    this.googleMap.controls[window.google.maps.ControlPosition.TOP_CENTER].push(input);
+
+    autocomplete.bindTo('bounds', this.googleMap);
+  // Set the data fields to return when the user selects a place.
+    autocomplete.setFields(
+    ['address_components', 'geometry', 'name']);
+
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      // console.log(place)
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      const bounds = new window.google.maps.LatLngBounds();
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+      this.setState(prevState => ({
+          currentLocation: {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          }
+      }))
+      this.createPlaces();
+      this.googleMap.fitBounds(bounds);
+    });
   }
 
   createPlaces = () => { 
@@ -101,16 +140,14 @@ export default class GoogleMap extends Component {
 
           const callback = (place, status) => {
             if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-              console.log(place);
+
               const clinicList = document.getElementById('clinics');
               const li = document.createElement('li');
               li.textContent = place.name;
               clinicList.appendChild(li);
             }
           }
-          
           service.getDetails(detailsRequest, callback);
-
         }
       }
     }
@@ -120,43 +157,7 @@ export default class GoogleMap extends Component {
     service.textSearch(request, callback);
   }
 
-  createSearchBox = () => {
-    const input = document.getElementById('pac-input');
-    const autocomplete = new window.google.maps.places.Autocomplete(input);
-
-    this.googleMap.controls[window.google.maps.ControlPosition.TOP_CENTER].push(input);
-
-    autocomplete.bindTo('bounds', this.googleMap);
-  // Set the data fields to return when the user selects a place.
-    autocomplete.setFields(
-    ['address_components', 'geometry', 'name']);
-
-    autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      console.log(place)
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-
-      const bounds = new window.google.maps.LatLngBounds();
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-      this.setState(prevState => ({
-          currentLocation: {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-          }
-      }))
-      this.createPlaces();
-      this.googleMap.fitBounds(bounds);
-    });
-  }
+  
   
 
   render() {
@@ -177,9 +178,7 @@ export default class GoogleMap extends Component {
         </div> 
         <div>
         CLINICS
-          <ul id="clinics">
-
-          </ul>
+          <ul id="clinics"></ul>
         </div>
       </div>  
     )

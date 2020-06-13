@@ -32,20 +32,26 @@ def view_map():
 
     return render_template('map.html')
 
+@app.route('api/places', methods=['GET', 'POST'])
+def get_places():
+    """GET places from map view and add in database"""
+
+    
+
 
 
 if __name__ == '__main__':
     connect_to_db(app)
     with app.app_context():
 
-        gmaps = googlemaps.Client(key='AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8')
+        # gmaps = googlemaps.Client(key='AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8')
 
-        places_result = gmaps.places(query='medical clinics')
+        # places_result = gmaps.places(query='medical clinics')
 
-        for clinic in places_result['results']:
-            name = clinic['name']
-            clinic_key = clinic['id']
-            db_clinic = crud.create_clinic(name, clinic_key)
+        # for clinic in places_result['results']:
+        #     name = clinic['name']
+        #     clinic_key = clinic['id']
+        #     db_clinic = crud.create_clinic(name, clinic_key)
     app.run(host='0.0.0.0', debug=True)
 
 
