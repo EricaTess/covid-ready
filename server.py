@@ -6,7 +6,7 @@ from model import connect_to_db
 from jinja2 import StrictUndefined
 from flask_cors import CORS
 
-import googlemaps
+# import googlemaps
 import crud
 import model
 # import seed_database 
@@ -32,9 +32,9 @@ def view_map():
 
     return render_template('map.html')
 
-@app.route('api/places', methods=['GET', 'POST'])
-def get_places():
-    """GET places from map view and add in database"""
+# @app.route('api/places', methods=['GET', 'POST'])
+# def get_places():
+#     """GET places from map view and add in database"""
 
     
 
@@ -42,7 +42,10 @@ def get_places():
 
 if __name__ == '__main__':
     connect_to_db(app)
-    with app.app_context():
+    app.run(host='0.0.0.0', debug=True)
+
+
+    # with app.app_context():
 
         # gmaps = googlemaps.Client(key='AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8')
 
@@ -52,7 +55,7 @@ if __name__ == '__main__':
         #     name = clinic['name']
         #     clinic_key = clinic['id']
         #     db_clinic = crud.create_clinic(name, clinic_key)
-    app.run(host='0.0.0.0', debug=True)
+    
 
 
 
