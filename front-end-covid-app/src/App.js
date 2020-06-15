@@ -1,4 +1,5 @@
-import React, { Component, createRef } from 'react'
+import React, { Component, createRef } from 'react';
+import SimpleRating from './components/Ratings';
 // import { Router, Route, Switch } from "react-router";
 
 
@@ -198,6 +199,10 @@ export default class GoogleMap extends Component {
           Clinic Information:
           <div id="clinic-info"></div>
         </form>
+        <SimpleRating />
+        <SimpleRating />
+        <SimpleRating />
+        <SimpleRating />
       </div>  
     )
   }
