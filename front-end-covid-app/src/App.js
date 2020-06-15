@@ -199,10 +199,13 @@ export default class GoogleMap extends Component {
           Clinic Information:
           <div id="clinic-info"></div>
         </form>
+<<<<<<< HEAD
         <SimpleRating />
         <SimpleRating />
         <SimpleRating />
         <SimpleRating />
+=======
+>>>>>>> 987631f7ee144b5d56c91c06b27372a9348f85e3
       </div>  
     )
   }
