@@ -37,8 +37,8 @@ li {
   background-color: #f1f1f1;
   padding: 10px;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: wrap;
+  /* overflow: scroll; */
 }
 
 li:nth-child(odd) {

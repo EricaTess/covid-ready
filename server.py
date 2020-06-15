@@ -20,17 +20,17 @@ cors = CORS(app)
 
 
 # Replace this with routes and view functions!
-@app.route('/')
-def homepage():
-    """View homepage"""
+# @app.route('/')
+# def homepage():
+#     """View homepage"""
 
-    return render_template('home.html')
+#     return render_template('front-end-covid-app/public/index.html')
 
-@app.route('/maps')
-def view_map():
-    """View map"""
+# @app.route('/maps')
+# def view_map():
+#     """View map"""
 
-    return render_template('map.html')
+#     return render_template('map.html')
 
 # @app.route('api/places', methods=['GET', 'POST'])
 # def get_places():
