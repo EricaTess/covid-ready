@@ -12,7 +12,9 @@ export default class GoogleMap extends Component {
       currentLocation: {
         lat: 37.7749,
         lng: -122.4194
-      }
+      },
+      currentClinic: [],
+      clinicInfo: null
     };
     this.googleMapRef = React.createRef();
   }
@@ -98,6 +100,11 @@ export default class GoogleMap extends Component {
     });
   }
 
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log('This list item was clicked');
+  }
+
   createPlaces = () => { 
 
     const request = {
@@ -143,7 +150,16 @@ export default class GoogleMap extends Component {
 
               const clinicList = document.getElementById('clinics');
               const li = document.createElement('li');
-              li.textContent = place.name;
+              li.addEventListener('click', () => {
+                const clinicInfo = document.getElementById('clinic-info');
+                clinicInfo.innerHTML = `${place.name}<br>
+                                        ${place.formatted_address}<br>
+                                        ${place.formatted_phone_number}<br>
+                                        ${place.opening_hours.weekday_text}<br>
+                                        ${place.website}`;
+                console.log(`I was clicked, ${place.name}`);
+              })
+              li.textContent = `${place.name}`;
               clinicList.appendChild(li);
             }
           }
@@ -157,8 +173,6 @@ export default class GoogleMap extends Component {
     service.textSearch(request, callback);
   }
 
-  
-  
 
   render() {
     return (
@@ -180,6 +194,10 @@ export default class GoogleMap extends Component {
         CLINICS
           <ul id="clinics"></ul>
         </div>
+        <form>
+          Clinic Information:
+          <div id="clinic-info"></div>
+        </form>
       </div>  
     )
   }
