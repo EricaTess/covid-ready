@@ -7,7 +7,7 @@ const INITIAL_LOCATION = {
 }
 
 let markers = [];
-// let clinics = [];
+
 
 export default class GoogleMap extends Component {
   constructor(props) {
@@ -117,91 +117,7 @@ export default class GoogleMap extends Component {
     this.setState.markers = [];
   }
 
-  // createMarkers = () => {
-  //   const request = {
-  //     query: 'medical clinic',
-  //     location: this.state.currentLocation,
-  //     radius: 500
-  //   };
-  //   const markers = [];
-  //   // const markersArr = [];
-  //   const clinics = [];
-
-  //   const callback = (results, status) => {
-
-  //     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-
-  //       for (let i = 0; i < results.length; i++) {
-    
-  //         const marker = new window.google.maps.Marker({
-  //           position: { lat: results[i].geometry.location.lat(),
-  //                        lng: results[i].geometry.location.lng() },
-  //           map: this.googleMap,
-  //         });
-  //         markers.push(marker);
-  //         // console.log(results[i]);
-  //         clinics.push(results[i]);
-  //       }
-  //     }
-  //   }
-  //   this.setState({
-  //     clinics: clinics
-  //   })
-  //   // console.log(markersArr)
-  //   // markers.forEach(function(marker) {
-  //   //   marker.setMap(this.googleMap);
-  //   // });
-  //   console.log(this.state.clinics);
-  //   const service = new window.google.maps.places.PlacesService(this.googleMap);
-  //   service.textSearch(request, callback);
-  // }
-
-  // createInfoWindow = () => {
-
-  //   const infoWindow = new window.google.maps.InfoWindow();
-  //   console.log('this is in infowindow')
-
-  //   this.state.clinics.forEach(function(clinic) {
-  //     console.log('marker')
-  //     clinic.addListener('click', () => {
-  //     infoWindow.setContent(`
-  //         <div>
-  //           <h3>${this.state.clinic.name}</h3>
-  //         </div>`)
-  //       infoWindow.open(this.googleMap, clinic);
-  //   })});
-  // }
-
-  // listClinics = () => {
-  //   for (let i = 0; i < this.state.clinics.length; i++){
-  //     const detailsRequest = {
-  //       placeId: this.state.clinics[i].place_id,
-  //       fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
-  //     }
-  //     // console.log(this.state.markers[i].place_id);
-  //     const callback = (place, status) => {
-  //       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
   
-  //         const clinicList = document.getElementById('clinics');
-  //         const li = document.createElement('li');
-  //         li.addEventListener('click', () => {
-  //           const clinicInfo = document.getElementById('clinic-info');
-  //           clinicInfo.innerHTML = `${place.name}<br>
-  //                                   ${place.formatted_address}<br>
-  //                                   ${place.formatted_phone_number}<br>
-  //                                   ${place.opening_hours.weekday_text}<br>
-  //                                   <a href="${place.website}">Website</a>`;
-  //           // console.log(`I was clicked, ${place.name}`);
-  //         })
-  //         li.textContent = `${place.name}`;
-  //         clinicList.appendChild(li);
-  //       }
-  //     }
-  //     const service = new window.google.maps.places.PlacesService(this.googleMap);
-  //     service.getDetails(detailsRequest, callback);
-  //   }
-  // }
-
   createPlaces = () => { 
 
     const request = {
@@ -211,7 +127,7 @@ export default class GoogleMap extends Component {
 
     const infoWindow = new window.google.maps.InfoWindow();
     const clinics = []
-    // const markers = []
+
     //Add markers and window info to each clinic
     const callback = (results, status) => {
       
@@ -237,7 +153,7 @@ export default class GoogleMap extends Component {
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });
-          markers.push(marker);
+          // markers.push(marker);
 
           marker.setMap(this.googleMap);
 

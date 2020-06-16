@@ -20,6 +20,9 @@ export default function SimpleRating(props) {
     }}>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">{props.name}</Typography>
+        <Typography component="legend">{props.address}</Typography>
+        <Typography component="legend">{props.phoneNumber}</Typography>
+        <Typography component="legend">{props.website}</Typography>
       </Box>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">Mask Usage</Typography>
