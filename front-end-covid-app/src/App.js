@@ -7,13 +7,13 @@ const INITIAL_LOCATION = {
 }
 
 let markers = [];
-let clinics = [];
+// let clinics = [];
 
 export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      markers: [],
+      mapMarkers: [],
       clinics: [],
       currentLocation: INITIAL_LOCATION,
     };
@@ -32,7 +32,6 @@ export default class GoogleMap extends Component {
       this.googleMap = this.createGoogleMap();
       this.search = this.createSearchBox();
       this.places = this.createPlaces();
-      this.details = this.getDetails();
 
       // this.marker = this.createMarkers();
       // this.infoWindow = this.createInfoWindow();
@@ -104,7 +103,6 @@ export default class GoogleMap extends Component {
       this.deleteMarker();
       this.createPlaces();
       this.googleMap.fitBounds(bounds);
-      markers = [];
     });
   }
 
@@ -208,16 +206,19 @@ export default class GoogleMap extends Component {
 
     const request = {
       query: 'medical clinic',
-      location: this.state.currentLocation,
-      radius: 500
+      location: this.state.currentLocation
     };
 
     const infoWindow = new window.google.maps.InfoWindow();
-    // const clinics = []
+    const clinics = []
+    // const markers = []
     //Add markers and window info to each clinic
     const callback = (results, status) => {
       
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        this.setState({
+          clinics: []
+        })
         for (let i = 0; i < results.length; i++) {
     
           const marker = new window.google.maps.Marker({
@@ -226,7 +227,9 @@ export default class GoogleMap extends Component {
             // map: this.googleMap
           });
           clinics.push(results[i]);
-
+          this.setState({
+            markers: []
+          })
           marker.addListener('click', () => {
             infoWindow.setContent(`
               <div>
@@ -235,9 +238,46 @@ export default class GoogleMap extends Component {
             infoWindow.open(this.googleMap, marker);
           });
           markers.push(marker);
+
           marker.setMap(this.googleMap);
+
+          //Create list with details
+          const detailsRequest = {
+            placeId: results[i].place_id,
+            fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
+          }
+
+          const callback = (place, status) => {
+            // console.log(place)
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+
+
+
+              // const clinicList = document.getElementById('clinics');
+              // const li = document.createElement('li');
+              // li.addEventListener('click', () => {
+              //   const clinicInfo = document.getElementById('clinic-info');
+                this.setState({
+                  clinics: clinics.concat(place)
+                })
+                // clinicInfo.innerHTML = `${place.name}<br>
+                //                         ${place.formatted_address}<br>
+                //                         ${place.formatted_phone_number}<br>
+                //                         ${place.opening_hours.weekday_text}<br>
+                //                         <a href="${place.website}">Website</a>`;
+              // })
+              // li.textContent = `${place.name}`;
+              // clinicList.appendChild(li);
+            }
+          }
+          markers.push(marker)
+          service.getDetails(detailsRequest, callback);
+          
         }
-        // console.log(clinics);
+        console.log('this is where I called setState')
+        this.setState({
+          mapMarkers: markers
+        })
       }
     }
     markers.forEach(function(marker) {
@@ -246,43 +286,28 @@ export default class GoogleMap extends Component {
     //Create the places service.
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
-    // this.getDetails();
-    clinics = []
-  }
-
-  getDetails = () => {
-    //Create list with details
-    for (let i = 0; i < clinics.length; i++){
-      const detailsRequest = {
-        placeId: clinics[i].place_id,
-        fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
-      }
-
-      const callback = (place, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-
-          const clinicList = document.getElementById('clinics');
-          const li = document.createElement('li');
-          li.addEventListener('click', () => {
-            const clinicInfo = document.getElementById('clinic-info');
-            clinicInfo.innerHTML = `${place.name}<br>
-                                    ${place.formatted_address}<br>
-                                    ${place.formatted_phone_number}<br>
-                                    ${place.opening_hours.weekday_text}<br>
-                                    <a href="${place.website}">Website</a>`;
-          })
-          li.textContent = `${place.name}`;
-          clinicList.appendChild(li);
-        }
-      }
-      const service = new window.google.maps.places.PlacesService(this.googleMap);
-    service.getDetails(detailsRequest, callback);  
-    }   
   }
 
   render() {
-    // console.log(markers);
-    console.log(clinics);
+
+    console.log('this.state.clinics:', typeof(this.state.clinics));
+    const clinicJSX = this.state.clinics.map((place) => {
+    console.log(place)
+      return (
+        <div>
+          <SimpleRating name={place.name} address={place.formatted_address}/>
+          <div>
+            {place.name}<br/>
+            {place.formatted_address}<br/>
+            {place.formatted_phone_number}<br/>
+            {/* {place.opening_hours.weekday_text}<br/> */}
+            <a href="{place.website}">Website</a>
+          </div>
+         </div>
+      )
+    })
+
+    console.log(this.state.mapMarkers, 'this is in render')
     return (
       <div>
         <div>
@@ -298,13 +323,14 @@ export default class GoogleMap extends Component {
             style={{ width: '600px', height: '400px' }}
           />
         </div> 
-        <div>
+        {/* <div>
         CLINICS
           <ul id="clinics"></ul>
-        </div>
+        </div> */}
         <form>
           Clinic Information:
           <div id="clinic-info">
+            {clinicJSX}
           </div>
         </form>
         <SimpleRating />
