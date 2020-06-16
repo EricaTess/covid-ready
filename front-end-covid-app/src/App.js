@@ -6,7 +6,8 @@ const INITIAL_LOCATION = {
   lng: -122.4194
 }
 
-const markers = [];
+let markers = [];
+let clinics = [];
 
 export default class GoogleMap extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class GoogleMap extends Component {
       this.googleMap = this.createGoogleMap();
       this.search = this.createSearchBox();
       this.places = this.createPlaces();
+      this.details = this.getDetails();
 
       // this.marker = this.createMarkers();
       // this.infoWindow = this.createInfoWindow();
@@ -101,8 +103,8 @@ export default class GoogleMap extends Component {
       }))
       this.deleteMarker();
       this.createPlaces();
-      
       this.googleMap.fitBounds(bounds);
+      markers = [];
     });
   }
 
@@ -209,13 +211,9 @@ export default class GoogleMap extends Component {
       location: this.state.currentLocation,
       radius: 500
     };
-    
-    // this.setState({
-    //   markers: []
-    // })
 
     const infoWindow = new window.google.maps.InfoWindow();
-    const clinics = []
+    // const clinics = []
     //Add markers and window info to each clinic
     const callback = (results, status) => {
       
@@ -236,37 +234,9 @@ export default class GoogleMap extends Component {
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });
-
-          //Create list with details
-          const detailsRequest = {
-            placeId: results[i].place_id,
-            fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
-          }
-
-          const callback = (place, status) => {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-
-              const clinicList = document.getElementById('clinics');
-              const li = document.createElement('li');
-              li.addEventListener('click', () => {
-                const clinicInfo = document.getElementById('clinic-info');
-                clinicInfo.innerHTML = `${place.name}<br>
-                                        ${place.formatted_address}<br>
-                                        ${place.formatted_phone_number}<br>
-                                        ${place.opening_hours.weekday_text}<br>
-                                        <a href="${place.website}">Website</a>`;
-              })
-              li.textContent = `${place.name}`;
-              clinicList.appendChild(li);
-            }
-          }
           markers.push(marker);
-          service.getDetails(detailsRequest, callback);
           marker.setMap(this.googleMap);
         }
-        this.setState({
-          markers: clinics
-        })
         // console.log(clinics);
       }
     }
@@ -276,9 +246,43 @@ export default class GoogleMap extends Component {
     //Create the places service.
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
+    // this.getDetails();
+    clinics = []
+  }
+
+  getDetails = () => {
+    //Create list with details
+    for (let i = 0; i < clinics.length; i++){
+      const detailsRequest = {
+        placeId: clinics[i].place_id,
+        fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
+      }
+
+      const callback = (place, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+
+          const clinicList = document.getElementById('clinics');
+          const li = document.createElement('li');
+          li.addEventListener('click', () => {
+            const clinicInfo = document.getElementById('clinic-info');
+            clinicInfo.innerHTML = `${place.name}<br>
+                                    ${place.formatted_address}<br>
+                                    ${place.formatted_phone_number}<br>
+                                    ${place.opening_hours.weekday_text}<br>
+                                    <a href="${place.website}">Website</a>`;
+          })
+          li.textContent = `${place.name}`;
+          clinicList.appendChild(li);
+        }
+      }
+      const service = new window.google.maps.places.PlacesService(this.googleMap);
+    service.getDetails(detailsRequest, callback);  
+    }   
   }
 
   render() {
+    // console.log(markers);
+    console.log(clinics);
     return (
       <div>
         <div>
