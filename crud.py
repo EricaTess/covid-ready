@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, Rating, Clinic, Measure, Measure_Rating, connect_to_db
+from model import db, User, Rating, connect_to_db
 
 def create_user(username, email, password):
     """Create a new User instance."""

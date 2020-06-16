@@ -32,10 +32,6 @@ export default class GoogleMap extends Component {
       this.googleMap = this.createGoogleMap();
       this.search = this.createSearchBox();
       this.places = this.createPlaces();
-
-      // this.marker = this.createMarkers();
-      // this.infoWindow = this.createInfoWindow();
-      // this.list = this.listClinics();
     });
   }
 
@@ -119,7 +115,6 @@ export default class GoogleMap extends Component {
 
   
   createPlaces = () => { 
-
     const request = {
       query: 'medical clinic',
       location: this.state.currentLocation
@@ -132,20 +127,15 @@ export default class GoogleMap extends Component {
     const callback = (results, status) => {
       
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({
-          clinics: []
-        })
+
         for (let i = 0; i < results.length; i++) {
     
           const marker = new window.google.maps.Marker({
             position: { lat: results[i].geometry.location.lat(),
                          lng: results[i].geometry.location.lng() }
-            // map: this.googleMap
           });
           clinics.push(results[i]);
-          this.setState({
-            markers: []
-          })
+
           marker.addListener('click', () => {
             infoWindow.setContent(`
               <div>
@@ -153,8 +143,7 @@ export default class GoogleMap extends Component {
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });
-          // markers.push(marker);
-
+          //Set markers on map
           marker.setMap(this.googleMap);
 
           //Create list with details
@@ -166,36 +155,18 @@ export default class GoogleMap extends Component {
           const callback = (place, status) => {
             // console.log(place)
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-
-
-
-              // const clinicList = document.getElementById('clinics');
-              // const li = document.createElement('li');
-              // li.addEventListener('click', () => {
-              //   const clinicInfo = document.getElementById('clinic-info');
                 this.setState({
                   clinics: clinics.concat(place)
                 })
-                // clinicInfo.innerHTML = `${place.name}<br>
-                //                         ${place.formatted_address}<br>
-                //                         ${place.formatted_phone_number}<br>
-                //                         ${place.opening_hours.weekday_text}<br>
-                //                         <a href="${place.website}">Website</a>`;
-              // })
-              // li.textContent = `${place.name}`;
-              // clinicList.appendChild(li);
             }
           }
+          //KEEP THIS LINE, IT PUSHES TO GLOBAL MARKER TO THEN REMOVE OLD MARKERS
           markers.push(marker)
-          service.getDetails(detailsRequest, callback);
-          
+          service.getDetails(detailsRequest, callback);          
         }
-        console.log('this is where I called setState')
-        this.setState({
-          mapMarkers: markers
-        })
       }
     }
+    //KEEP THIS LINE, REMOVES EACH MARKER
     markers.forEach(function(marker) {
       marker.setMap(null);
     });
@@ -205,13 +176,11 @@ export default class GoogleMap extends Component {
   }
 
   render() {
-
-    console.log('this.state.clinics:', typeof(this.state.clinics));
     const clinicJSX = this.state.clinics.map((place) => {
-    console.log(place)
+    // console.log(place)
       return (
         <div>
-          <SimpleRating name={place.name} address={place.formatted_address}/>
+          <SimpleRating key={place.id} name={place.name} address={place.formatted_address}/>
           <div>
             {place.name}<br/>
             {place.formatted_address}<br/>
@@ -223,7 +192,7 @@ export default class GoogleMap extends Component {
       )
     })
 
-    console.log(this.state.mapMarkers, 'this is in render')
+    // console.log(this.state.mapMarkers, 'this is in render')
     return (
       <div>
         <div>

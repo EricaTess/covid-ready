@@ -21,55 +21,55 @@ class User(db.Model):
         return f'<User user_id={self.user_id} username={self.username}>'
 
 
-class Clinic(db.Model):
-    """A clinic"""
+# class Clinic(db.Model):
+#     """A clinic"""
 
-    __tablename__ = 'clinics'
+#     __tablename__ = 'clinics'
 
-    clinic_id = db.Column(db.Integer,
-                        primary_key=True,
-                        autoincrement=True)
-    name = db.Column(db.String)
-    clinic_key = db.Column(db.String, unique=True)
+#     clinic_id = db.Column(db.Integer,
+#                         primary_key=True,
+#                         autoincrement=True)
+#     name = db.Column(db.String)
+#     # clinic_key = db.Column(db.String, unique=True)
 
-    def __repr__(self):
-        return f'<Clinic clinic_id={self.clinic_id} name={self.name}>'
-
-
-class Measure(db.Model):
-    """A covid measure."""
-
-    __tablename__ = 'measures'
-
-    measure_code = db.Column(db.String,
-                            primary_key=True,
-                            unique=True)
-    measure = db.Column(db.String, unique=True)
-    max_score = db.Column(db.Integer)
-
-    def __repr__(self):
-        return f'<Measure measure_code={self.measure_code} max_score={self.max_score}>'
+#     def __repr__(self):
+#         return f'<Clinic clinic_id={self.clinic_id} name={self.name}>'
 
 
-class Measure_Rating(db.Model):
-    """A measure rating."""
+# class Measure(db.Model):
+#     """A covid measure."""
 
-    __tablename__ = 'measure_ratings'
+#     __tablename__ = 'measures'
 
-    id = db.Column(db.Integer,
-                    primary_key=True,
-                    autoincrement=True)
-    score = db.Column(db.Integer)
-    rating_id = db.Column(db.Integer,
-                        db.ForeignKey('ratings.rating_id'))
-    measure_code = db.Column(db.String,
-                        db.ForeignKey('measures.measure_code'))
+#     measure_code = db.Column(db.String,
+#                             primary_key=True,
+#                             unique=True)
+#     measure = db.Column(db.String, unique=True)
+#     max_score = db.Column(db.Integer)
 
-    rating = db.relationship('Rating', backref='measure_ratings')
-    measure = db.relationship('Measure', backref='measure_ratings')
+#     def __repr__(self):
+#         return f'<Measure measure_code={self.measure_code} max_score={self.max_score}>'
 
-    def __repr__(self):
-        return f'<Measure Rating id={self.id} score={self.score}>'
+
+# class Measure_Rating(db.Model):
+#     """A measure rating."""
+
+#     __tablename__ = 'measure_ratings'
+
+#     id = db.Column(db.Integer,
+#                     primary_key=True,
+#                     autoincrement=True)
+#     score = db.Column(db.Integer)
+#     rating_id = db.Column(db.Integer,
+#                         db.ForeignKey('ratings.rating_id'))
+#     measure_code = db.Column(db.String,
+#                         db.ForeignKey('measures.measure_code'))
+
+#     rating = db.relationship('Rating', backref='measure_ratings')
+#     measure = db.relationship('Measure', backref='measure_ratings')
+
+#     def __repr__(self):
+#         return f'<Measure Rating id={self.id} score={self.score}>'
 
 
 class Rating(db.Model):
@@ -80,13 +80,16 @@ class Rating(db.Model):
     rating_id = db.Column(db.Integer,
                         primary_key=True,
                         autoincrement=True)
-    overall_score = db.Column(db.Integer)
-    clinic_id = db.Column(db.Integer,
-                        db.ForeignKey('clinics.clinic_id'))
+    # overall_score = db.Column(db.Integer)
+    place_id = db.Column(db.String)
+    mask_usage = db.Column(db.Integer)
+    cleanliness = db.Column(db.Integer)
+    six_ft_distance = db.Column(db.Integer)
+    glove_usage = db.Column(db.Integer)
     user_id = db.Column(db.Integer,
                         db.ForeignKey('users.user_id'))
 
-    clinic = db.relationship('Clinic', backref='ratings')
+    # clinic = db.relationship('Clinic', backref='ratings')
     user = db.relationship('User', backref='ratings')
 
     def __repr__(self):

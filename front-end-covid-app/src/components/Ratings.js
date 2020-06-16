@@ -4,50 +4,85 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 export default function SimpleRating(props) {
-  const [isClicked, setIsClicked] = React.useState(false);
-  if (!isClicked) {
-      return (<div onClick={() => {
-          setIsClicked(!isClicked)
-      }}>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">{props.name}</Typography>
-      </Box>
-      </div>)
-  }
+
+
+    const [value, setValue] = React.useState()
+//   const [isClicked, setIsClicked] = React.useState(false);
+//   if (!isClicked) {
+//       return (<div onClick={() => {
+//           setIsClicked(!isClicked)
+//       }}>
+//       <Box component="fieldset" mb={3} borderColor="transparent">
+//         <Typography component="legend">{props.name}</Typography>
+//       </Box>
+//       </div>)
+//   }
+
+
+    const handleRating = (event) => {
+        console.log(event.target.value);
+        // data = {
+        //     value: event.target.value,
+        //     name: event.target.name
+        // }
+
+        fetch('/ratings', {
+            method: "POST",
+            body: JSON.stringify()
+        });
+        // .then(response => response.json());
+        // .then(data => console.log(data));
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('submitted');
+    }
+
   return (
-    <div onClick={() => {
-        setIsClicked(!isClicked)
-    }}>
+    <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">{props.name}</Typography>
         <Typography component="legend">{props.address}</Typography>
         <Typography component="legend">{props.phoneNumber}</Typography>
+
         <Typography component="legend">{props.website}</Typography>
       </Box>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Mask Usage</Typography>
-        <Rating
-          name="mask-usage"
-        />
-      </Box>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Cleanliness</Typography>
-        <Rating
-          name="cleanliness"
-        />
-      </Box>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Six Foot Distancing</Typography>
-        <Rating
-          name="six-foot-distancing"
-        />
-      </Box>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Glove Usage</Typography>
-        <Rating
-          name="glove-usage"
-        />
-      </Box>
+      {/* <form onSubmit={this.handleSubmit}> */}
+        <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">Mask Usage</Typography>
+            <Rating
+            name="mask-usage"
+            value={value}
+            onClick={handleRating}
+            />
+        </Box>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">Cleanliness</Typography>
+            <Rating
+            name="cleanliness"
+            value={value}
+            onClick={handleRating}
+            />
+        </Box>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">Six Foot Distancing</Typography>
+            <Rating
+            name="six-foot-distancing"
+            value={value}
+            onClick={handleRating}
+            />
+        </Box>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">Glove Usage</Typography>
+            <Rating
+            name="glove-usage"
+            value={value}
+            onClick={handleRating}
+            />
+        </Box>
+        <input type="submit" onClick={handleSubmit} value="Submit" />
+      {/* </form> */}
     </div>
   );
 }
