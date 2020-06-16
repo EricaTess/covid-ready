@@ -1,26 +1,26 @@
 import React, { Component, createRef } from 'react';
 import SimpleRating from './components/Ratings';
-// import { Router, Route, Switch } from "react-router";
 
+const INITIAL_LOCATION = {
+  lat: 37.7749,
+  lng: -122.4194
+}
 
-// const placesList = [];
+const markers = [];
 
 export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       markers: [],
-      currentLocation: {
-        lat: 37.7749,
-        lng: -122.4194
-      },
-      currentClinic: [],
-      clinicInfo: null
+      clinics: [],
+      currentLocation: INITIAL_LOCATION,
     };
     this.googleMapRef = React.createRef();
   }
 
   componentDidMount() {
+    
     const googleMapScript = document.createElement("script");
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&libraries=places`;
     window.document.body.appendChild(googleMapScript);
@@ -31,7 +31,10 @@ export default class GoogleMap extends Component {
       this.googleMap = this.createGoogleMap();
       this.search = this.createSearchBox();
       this.places = this.createPlaces();
-      
+
+      // this.marker = this.createMarkers();
+      // this.infoWindow = this.createInfoWindow();
+      // this.list = this.listClinics();
     });
   }
 
@@ -76,7 +79,7 @@ export default class GoogleMap extends Component {
 
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
-      // console.log(place)
+
       if (!place.geometry) {
         console.log("Returned place contains no geometry");
         return;
@@ -96,15 +99,108 @@ export default class GoogleMap extends Component {
             lng: place.geometry.location.lng()
           }
       }))
+      this.deleteMarker();
       this.createPlaces();
+      
       this.googleMap.fitBounds(bounds);
     });
   }
 
-  handleClick = (e) => {
-    e.preventDefault();
-    console.log('This list item was clicked');
+  setMapOnAll = () => {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(this.googleMap);
+    }
   }
+
+  deleteMarker = () => {
+    this.setMapOnAll(null);
+    this.setState.markers = [];
+  }
+
+  // createMarkers = () => {
+  //   const request = {
+  //     query: 'medical clinic',
+  //     location: this.state.currentLocation,
+  //     radius: 500
+  //   };
+  //   const markers = [];
+  //   // const markersArr = [];
+  //   const clinics = [];
+
+  //   const callback = (results, status) => {
+
+  //     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+
+  //       for (let i = 0; i < results.length; i++) {
+    
+  //         const marker = new window.google.maps.Marker({
+  //           position: { lat: results[i].geometry.location.lat(),
+  //                        lng: results[i].geometry.location.lng() },
+  //           map: this.googleMap,
+  //         });
+  //         markers.push(marker);
+  //         // console.log(results[i]);
+  //         clinics.push(results[i]);
+  //       }
+  //     }
+  //   }
+  //   this.setState({
+  //     clinics: clinics
+  //   })
+  //   // console.log(markersArr)
+  //   // markers.forEach(function(marker) {
+  //   //   marker.setMap(this.googleMap);
+  //   // });
+  //   console.log(this.state.clinics);
+  //   const service = new window.google.maps.places.PlacesService(this.googleMap);
+  //   service.textSearch(request, callback);
+  // }
+
+  // createInfoWindow = () => {
+
+  //   const infoWindow = new window.google.maps.InfoWindow();
+  //   console.log('this is in infowindow')
+
+  //   this.state.clinics.forEach(function(clinic) {
+  //     console.log('marker')
+  //     clinic.addListener('click', () => {
+  //     infoWindow.setContent(`
+  //         <div>
+  //           <h3>${this.state.clinic.name}</h3>
+  //         </div>`)
+  //       infoWindow.open(this.googleMap, clinic);
+  //   })});
+  // }
+
+  // listClinics = () => {
+  //   for (let i = 0; i < this.state.clinics.length; i++){
+  //     const detailsRequest = {
+  //       placeId: this.state.clinics[i].place_id,
+  //       fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
+  //     }
+  //     // console.log(this.state.markers[i].place_id);
+  //     const callback = (place, status) => {
+  //       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+  
+  //         const clinicList = document.getElementById('clinics');
+  //         const li = document.createElement('li');
+  //         li.addEventListener('click', () => {
+  //           const clinicInfo = document.getElementById('clinic-info');
+  //           clinicInfo.innerHTML = `${place.name}<br>
+  //                                   ${place.formatted_address}<br>
+  //                                   ${place.formatted_phone_number}<br>
+  //                                   ${place.opening_hours.weekday_text}<br>
+  //                                   <a href="${place.website}">Website</a>`;
+  //           // console.log(`I was clicked, ${place.name}`);
+  //         })
+  //         li.textContent = `${place.name}`;
+  //         clinicList.appendChild(li);
+  //       }
+  //     }
+  //     const service = new window.google.maps.places.PlacesService(this.googleMap);
+  //     service.getDetails(detailsRequest, callback);
+  //   }
+  // }
 
   createPlaces = () => { 
 
@@ -113,29 +209,30 @@ export default class GoogleMap extends Component {
       location: this.state.currentLocation,
       radius: 500
     };
+    
+    // this.setState({
+    //   markers: []
+    // })
 
     const infoWindow = new window.google.maps.InfoWindow();
-
+    const clinics = []
     //Add markers and window info to each clinic
     const callback = (results, status) => {
-
+      
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
-
-          // fetch()
-          // console.log(results[i].name);
     
           const marker = new window.google.maps.Marker({
             position: { lat: results[i].geometry.location.lat(),
-                         lng: results[i].geometry.location.lng() },
-            map: this.googleMap,
-          })
+                         lng: results[i].geometry.location.lng() }
+            // map: this.googleMap
+          });
+          clinics.push(results[i]);
+
           marker.addListener('click', () => {
-            infoWindow.setContent(`<div>
+            infoWindow.setContent(`
+              <div>
                 <h3>${results[i].name}</h3>
-                <p>
-                  ${results[i].formatted_address}
-                <p>
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });
@@ -147,7 +244,7 @@ export default class GoogleMap extends Component {
           }
 
           const callback = (place, status) => {
-            if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
 
               const clinicList = document.getElementById('clinics');
               const li = document.createElement('li');
@@ -157,23 +254,29 @@ export default class GoogleMap extends Component {
                                         ${place.formatted_address}<br>
                                         ${place.formatted_phone_number}<br>
                                         ${place.opening_hours.weekday_text}<br>
-                                        ${place.website}`;
-                console.log(`I was clicked, ${place.name}`);
+                                        <a href="${place.website}">Website</a>`;
               })
               li.textContent = `${place.name}`;
               clinicList.appendChild(li);
             }
           }
+          markers.push(marker);
           service.getDetails(detailsRequest, callback);
+          marker.setMap(this.googleMap);
         }
+        this.setState({
+          markers: clinics
+        })
+        // console.log(clinics);
       }
     }
-
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
     //Create the places service.
     const service = new window.google.maps.places.PlacesService(this.googleMap);
     service.textSearch(request, callback);
   }
-
 
   render() {
     return (
@@ -197,15 +300,10 @@ export default class GoogleMap extends Component {
         </div>
         <form>
           Clinic Information:
-          <div id="clinic-info"></div>
+          <div id="clinic-info">
+          </div>
         </form>
-<<<<<<< HEAD
         <SimpleRating />
-        <SimpleRating />
-        <SimpleRating />
-        <SimpleRating />
-=======
->>>>>>> 987631f7ee144b5d56c91c06b27372a9348f85e3
       </div>  
     )
   }
