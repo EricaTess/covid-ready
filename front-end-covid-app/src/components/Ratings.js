@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 export default function SimpleRating(props) {
 
 
-    const [value, setValue] = React.useState()
+    const [value, setValue] = useState()
 //   const [isClicked, setIsClicked] = React.useState(false);
 //   if (!isClicked) {
 //       return (<div onClick={() => {
@@ -20,8 +20,8 @@ export default function SimpleRating(props) {
 
 
     const handleRating = (event) => {
-        console.log(props.place_id);
-        console.log(event.target.value);
+        // console.log(props.place_id);
+        // console.log(event.target.value);
 
         const data = {
             measure: event.target.name,
@@ -45,6 +45,7 @@ export default function SimpleRating(props) {
 
   return (
     <div>
+        //CLINIC INFO
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">{props.name}</Typography>
         <Typography component="legend">{props.address}</Typography>
@@ -52,10 +53,11 @@ export default function SimpleRating(props) {
         <Typography component="legend">{props.hours}</Typography>
         <Typography component="legend">{props.website}</Typography>
       </Box>
+      //RATINGS
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating
-            name="mask-usage"
+            name={"mask-usage|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
@@ -63,7 +65,7 @@ export default function SimpleRating(props) {
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
-            name="cleanliness"
+            name={"cleanliness|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
@@ -71,7 +73,7 @@ export default function SimpleRating(props) {
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Six Foot Distancing</Typography>
             <Rating
-            name="six-foot-distancing"
+            name={"six-foot-distancing|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
@@ -79,7 +81,7 @@ export default function SimpleRating(props) {
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Glove Usage</Typography>
             <Rating
-            name="glove-usage"
+            name={"glove-usage|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
