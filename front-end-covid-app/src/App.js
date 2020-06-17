@@ -157,7 +157,7 @@ export default class GoogleMap extends Component {
           // this.setState({clinicId: this.state.clinicId.concat(detailsRequest['placeId'])})
 
           const callback = (place, status) => {
-            // console.log(place)
+
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
               //ADD CLINIC ID TO PLACE
               place["id"] = `${detailsRequest["placeId"]}`;
@@ -184,7 +184,18 @@ export default class GoogleMap extends Component {
   render() {
     
     const clinicJSX = this.state.clinics.map((place) => {
-        // console.log(place);
+        // if (place["opening_hours"]["weekday_text"] === undefined) {
+        //   return (
+        //     <div>
+        //       <SimpleRating name={place.name} 
+        //                   address={place.formatted_address} 
+        //                   place_id={place.id}
+        //                   phone={place.formatted_phone_number}
+        //                   website={place.website}/>
+        //     </div>
+        //   )
+        // }
+        // console.log('these are the places: ', place);
         // console.log(place);
         return (
           <div>
@@ -192,7 +203,7 @@ export default class GoogleMap extends Component {
                           address={place.formatted_address} 
                           place_id={place.id}
                           phone={place.formatted_phone_number}
-                          // hours={place.opening_hours.weekday_text}
+                          // hours={place["opening_hours"]["weekday_text"]}
                           website={place.website}/>
             <div>
               {/* {place.name}<br/>
@@ -237,4 +248,3 @@ export default class GoogleMap extends Component {
     )
   }
 }
-

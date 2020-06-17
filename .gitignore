@@ -1,3 +1,5 @@
 env/
 __pycache__
 secrets.sh
+front-end-covid-app/node_modules
+.DS_Store
