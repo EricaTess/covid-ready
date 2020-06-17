@@ -13,7 +13,6 @@ export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapMarkers: [],
       clinics: [],
       currentLocation: INITIAL_LOCATION,
     };
@@ -120,8 +119,11 @@ export default class GoogleMap extends Component {
       location: this.state.currentLocation
     };
 
+    //Clear clinic list
+    this.setState({clinics: []})
+
     const infoWindow = new window.google.maps.InfoWindow();
-    const clinics = []
+    // const clinics = []
 
     //Add markers and window info to each clinic
     const callback = (results, status) => {
@@ -134,7 +136,7 @@ export default class GoogleMap extends Component {
             position: { lat: results[i].geometry.location.lat(),
                          lng: results[i].geometry.location.lng() }
           });
-          clinics.push(results[i]);
+          // clinics.push(results[i]);
 
           marker.addListener('click', () => {
             infoWindow.setContent(`
@@ -155,9 +157,9 @@ export default class GoogleMap extends Component {
           const callback = (place, status) => {
             // console.log(place)
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                this.setState({
-                  clinics: clinics.concat(place)
-                })
+              //Add clinics to state
+              const places = this.state.clinics.concat(place);
+              this.setState({clinics: places})
             }
           }
           //KEEP THIS LINE, IT PUSHES TO GLOBAL MARKER TO THEN REMOVE OLD MARKERS
@@ -177,17 +179,22 @@ export default class GoogleMap extends Component {
 
   render() {
     const clinicJSX = this.state.clinics.map((place) => {
-    // console.log(place.place_id);
+    // console.log(place);
       return (
         <div>
-          <SimpleRating name={place.name} address={place.formatted_address} placeId={place.place_id}/>
+          <SimpleRating name={place.name} 
+                        address={place.formatted_address} 
+                        placeId={place.place_id}
+                        phone={place.formatted_phone_number}
+                        // hours={place.opening_hours.weekday_text}
+                        website={place.website}/>
           <div>
-            {place.name}<br/>
+            {/* {place.name}<br/>
             {place.formatted_address}<br/>
             {place.formatted_phone_number}<br/>
             {/* {place.place_id}</br> */}
             {/* {place.opening_hours.weekday_text}<br/> */}
-            <a href="{place.website}">Website</a>
+            {/* <a href="{place.website}">Website</a> */}
           </div>
          </div>
       )
@@ -219,7 +226,6 @@ export default class GoogleMap extends Component {
             {clinicJSX}
           </div>
         </form>
-        <SimpleRating />
       </div>  
     )
   }
