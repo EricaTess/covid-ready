@@ -20,13 +20,13 @@ export default function SimpleRating(props) {
 
 
     const handleRating = (event) => {
-        console.log(props.placeId);
+        console.log(props.place_id);
         console.log(event.target.value);
 
         const data = {
             measure: event.target.name,
             score: event.target.value,
-            place_id: props.placeId
+            place_id: props.place_id
         };
 
         fetch('/ratings', {
@@ -47,7 +47,6 @@ export default function SimpleRating(props) {
         <Typography component="legend">{props.name}</Typography>
         <Typography component="legend">{props.address}</Typography>
         <Typography component="legend">{props.phoneNumber}</Typography>
-
         <Typography component="legend">{props.website}</Typography>
       </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">

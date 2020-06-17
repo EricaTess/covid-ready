@@ -14,6 +14,7 @@ export default class GoogleMap extends Component {
     super(props);
     this.state = {
       clinics: [],
+      clinicId: [],
       currentLocation: INITIAL_LOCATION,
     };
     this.googleMapRef = React.createRef();
@@ -131,7 +132,6 @@ export default class GoogleMap extends Component {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
 
         for (let i = 0; i < results.length; i++) {
-    
           const marker = new window.google.maps.Marker({
             position: { lat: results[i].geometry.location.lat(),
                          lng: results[i].geometry.location.lng() }
@@ -153,11 +153,15 @@ export default class GoogleMap extends Component {
             placeId: results[i].place_id,
             fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
           }
+          
+          // this.setState({clinicId: this.state.clinicId.concat(detailsRequest['placeId'])})
 
           const callback = (place, status) => {
             // console.log(place)
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-              //Add clinics to state
+              //ADD CLINIC ID TO PLACE
+              place["id"] = `${detailsRequest["placeId"]}`;
+              //Add clinic info to state
               const places = this.state.clinics.concat(place);
               this.setState({clinics: places})
             }
@@ -178,26 +182,29 @@ export default class GoogleMap extends Component {
   }
 
   render() {
+    
     const clinicJSX = this.state.clinics.map((place) => {
-    // console.log(place);
-      return (
-        <div>
-          <SimpleRating name={place.name} 
-                        address={place.formatted_address} 
-                        placeId={place.place_id}
-                        phone={place.formatted_phone_number}
-                        // hours={place.opening_hours.weekday_text}
-                        website={place.website}/>
+        // console.log(place);
+        // console.log(place);
+        return (
           <div>
-            {/* {place.name}<br/>
-            {place.formatted_address}<br/>
-            {place.formatted_phone_number}<br/>
-            {/* {place.place_id}</br> */}
-            {/* {place.opening_hours.weekday_text}<br/> */}
-            {/* <a href="{place.website}">Website</a> */}
+            <SimpleRating name={place.name} 
+                          address={place.formatted_address} 
+                          place_id={place.id}
+                          phone={place.formatted_phone_number}
+                          // hours={place.opening_hours.weekday_text}
+                          website={place.website}/>
+            <div>
+              {/* {place.name}<br/>
+              {place.formatted_address}<br/>
+              {place.formatted_phone_number}<br/>
+              {/* {place.place_id}</br> */}
+              {/* {place.opening_hours.weekday_text}<br/> */}
+              {/* <a href="{place.website}">Website</a> */}
+            </div>
           </div>
-         </div>
-      )
+        )
+      // })
     })
 
     // console.log(this.state.mapMarkers, 'this is in render')
