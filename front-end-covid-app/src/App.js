@@ -177,14 +177,15 @@ export default class GoogleMap extends Component {
 
   render() {
     const clinicJSX = this.state.clinics.map((place) => {
-    // console.log(place)
+    // console.log(place.place_id);
       return (
         <div>
-          <SimpleRating key={place.id} name={place.name} address={place.formatted_address}/>
+          <SimpleRating name={place.name} address={place.formatted_address} placeId={place.place_id}/>
           <div>
             {place.name}<br/>
             {place.formatted_address}<br/>
             {place.formatted_phone_number}<br/>
+            {/* {place.place_id}</br> */}
             {/* {place.opening_hours.weekday_text}<br/> */}
             <a href="{place.website}">Website</a>
           </div>

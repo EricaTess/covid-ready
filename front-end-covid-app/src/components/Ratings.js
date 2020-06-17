@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Rating } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -20,24 +20,26 @@ export default function SimpleRating(props) {
 
 
     const handleRating = (event) => {
+        console.log(props.placeId);
         console.log(event.target.value);
-        // data = {
-        //     value: event.target.value,
-        //     name: event.target.name
-        // }
+
+        const data = {
+            measure: event.target.name,
+            score: event.target.value,
+            place_id: props.placeId
+        };
 
         fetch('/ratings', {
-            method: "POST",
-            body: JSON.stringify()
-        });
-        // .then(response => response.json());
-        // .then(data => console.log(data));
+            method: 'POST',
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(data),
+        })
+          .then(response => response.json())
+          .then(res => console.log(res));
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log('submitted');
-    }
 
   return (
     <div>
@@ -48,7 +50,6 @@ export default function SimpleRating(props) {
 
         <Typography component="legend">{props.website}</Typography>
       </Box>
-      {/* <form onSubmit={this.handleSubmit}> */}
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating
@@ -81,8 +82,6 @@ export default function SimpleRating(props) {
             onClick={handleRating}
             />
         </Box>
-        <input type="submit" onClick={handleSubmit} value="Submit" />
-      {/* </form> */}
     </div>
   );
 }

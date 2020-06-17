@@ -80,20 +80,16 @@ class Rating(db.Model):
     rating_id = db.Column(db.Integer,
                         primary_key=True,
                         autoincrement=True)
-    # overall_score = db.Column(db.Integer)
     place_id = db.Column(db.String)
-    mask_usage = db.Column(db.Integer)
-    cleanliness = db.Column(db.Integer)
-    six_ft_distance = db.Column(db.Integer)
-    glove_usage = db.Column(db.Integer)
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey('users.user_id'))
+    name = db.Column(db.String)
+    score = db.Column(db.Integer)
+    # user_id = db.Column(db.Integer,
+    #                     db.ForeignKey('users.user_id'))
 
-    # clinic = db.relationship('Clinic', backref='ratings')
-    user = db.relationship('User', backref='ratings')
+    # user = db.relationship('User', backref='ratings')
 
     def __repr__(self):
-        return f'<Rating rating_id={self.rating_id} overall_score={self.overall_score}>'
+        return f'<Rating rating_id={self.rating_id} place_id={self.place_id}>'
 
 
 

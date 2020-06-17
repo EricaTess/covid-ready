@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session, redirect, se
 from model import connect_to_db
 from jinja2 import StrictUndefined
 from flask_cors import CORS
+import json
 
 # import googlemaps
 import crud
@@ -27,23 +28,20 @@ def homepage():
     return {"status": "test"}
     # return render_template('front-end-covid-app/public/index.html')
 
-@app.route('/ratings', methods=['GET', 'POST'])
+@app.route('/ratings', methods=['POST'])
 def get_ratings():
-    """Get and Post Ratings"""
-    print('it posted')
+    """Post Ratings"""
+
+    print(request.json)
+    place_id = request.json["place_id"]
+    measure = request.json["measure"]
+    score = request.json["score"]
+
+
+    crud.create_rating(place_id, measure, score)
+    # print("****", request.get_json(force=True), "****")
     return {"did this": "work"}
 
-# @app.route('/maps')
-# def view_map():
-#     """View map"""
-
-#     return render_template('map.html')
-
-# @app.route('api/places', methods=['GET', 'POST'])
-# def get_places():
-#     """GET places from map view and add in database"""
-
-    
 
 
 
@@ -51,17 +49,6 @@ if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
 
-
-    # with app.app_context():
-
-        # gmaps = googlemaps.Client(key='AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8')
-
-        # places_result = gmaps.places(query='medical clinics')
-
-        # for clinic in places_result['results']:
-        #     name = clinic['name']
-        #     clinic_key = clinic['id']
-        #     db_clinic = crud.create_clinic(name, clinic_key)
     
 
 

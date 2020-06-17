@@ -32,12 +32,12 @@ def create_measure_rating(score):
 
     return measure_rating
 
-def create_rating(overall_score, clinic, user):
+def create_rating(place_id, name, score):
     """Create and return a new rating"""
 
-    rating = Rating(overall_score, 
-                    user=user, 
-                    clinic=clinic)
+    rating = Rating(place_id=place_id, 
+                    name=name,
+                    score=score)
     
     db.session.add(rating)
     db.session.commit()
