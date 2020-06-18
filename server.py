@@ -6,6 +6,7 @@ from model import connect_to_db
 from jinja2 import StrictUndefined
 from flask_cors import CORS
 import json
+from flask_bcrypt import Bcrypt
 
 # import googlemaps
 import crud
@@ -18,10 +19,11 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 cors = CORS(app)
+bcrypt = Bcrypt(app)
 
 
 # Replace this with routes and view functions!
-@app.route('/test')
+@app.route('/')
 def homepage():
     """View homepage"""
 
@@ -37,11 +39,46 @@ def get_ratings():
     measure = request.json["measure"]
     score = request.json["score"]
 
-
     crud.create_rating(place_id, measure, score)
-    # print("****", request.get_json(force=True), "****")
+
     return {"did this": "work"}
 
+@app.route('/users/register', methods=['POST'])
+def register():
+    """Register User"""
+
+    print(request.json)
+    username = request.json['username']
+    email = request.json['email']
+    password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')
+    
+    crud.create_user(username, email, password)
+
+    result = {
+        'username': username,
+        'email': email,
+        'password': password
+    }
+
+    return jsonify({'result': result})
+
+@app.route('/users/login', methods=['POST'])
+def login():
+    """Login User"""
+
+    email = request.get_json['email']
+    password = request.get_json()['password']
+    result = ""
+
+    # if bcrypt.check_password_hash(rv)/
+    result = {
+        'email': email,
+        'password': password
+    }
+
+    return jsonify({'result': result})
+
+    
 
 
 if __name__ == '__main__':

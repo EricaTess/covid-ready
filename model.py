@@ -21,57 +21,6 @@ class User(db.Model):
         return f'<User user_id={self.user_id} username={self.username}>'
 
 
-# class Clinic(db.Model):
-#     """A clinic"""
-
-#     __tablename__ = 'clinics'
-
-#     clinic_id = db.Column(db.Integer,
-#                         primary_key=True,
-#                         autoincrement=True)
-#     name = db.Column(db.String)
-#     # clinic_key = db.Column(db.String, unique=True)
-
-#     def __repr__(self):
-#         return f'<Clinic clinic_id={self.clinic_id} name={self.name}>'
-
-
-# class Measure(db.Model):
-#     """A covid measure."""
-
-#     __tablename__ = 'measures'
-
-#     measure_code = db.Column(db.String,
-#                             primary_key=True,
-#                             unique=True)
-#     measure = db.Column(db.String, unique=True)
-#     max_score = db.Column(db.Integer)
-
-#     def __repr__(self):
-#         return f'<Measure measure_code={self.measure_code} max_score={self.max_score}>'
-
-
-# class Measure_Rating(db.Model):
-#     """A measure rating."""
-
-#     __tablename__ = 'measure_ratings'
-
-#     id = db.Column(db.Integer,
-#                     primary_key=True,
-#                     autoincrement=True)
-#     score = db.Column(db.Integer)
-#     rating_id = db.Column(db.Integer,
-#                         db.ForeignKey('ratings.rating_id'))
-#     measure_code = db.Column(db.String,
-#                         db.ForeignKey('measures.measure_code'))
-
-#     rating = db.relationship('Rating', backref='measure_ratings')
-#     measure = db.relationship('Measure', backref='measure_ratings')
-
-#     def __repr__(self):
-#         return f'<Measure Rating id={self.id} score={self.score}>'
-
-
 class Rating(db.Model):
     """A rating."""
 
@@ -83,10 +32,10 @@ class Rating(db.Model):
     place_id = db.Column(db.String)
     name = db.Column(db.String)
     score = db.Column(db.Integer)
-    # user_id = db.Column(db.Integer,
-    #                     db.ForeignKey('users.user_id'))
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.user_id'))
 
-    # user = db.relationship('User', backref='ratings')
+    user = db.relationship('User', backref='ratings')
 
     def __repr__(self):
         return f'<Rating rating_id={self.rating_id} place_id={self.place_id}>'

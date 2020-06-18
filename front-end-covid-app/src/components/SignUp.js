@@ -23,7 +23,7 @@ export default class SignUp extends Component {
             password: this.state.password
         }
 
-        fetch('users/register', {
+        fetch('/users/register', {
             method: 'POST',
             headers:{
                 "content_type":"application/json",
