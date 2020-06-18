@@ -45,15 +45,13 @@ export default function SimpleRating(props) {
 
   return (
     <div>
-        //CLINIC INFO
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">{props.name}</Typography>
         <Typography component="legend">{props.address}</Typography>
         <Typography component="legend">{props.phoneNumber}</Typography>
         <Typography component="legend">{props.hours}</Typography>
-        <Typography component="legend">{props.website}</Typography>
+        <Typography component="legend"><a href={props.website}>Website</a></Typography>
       </Box>
-      //RATINGS
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating

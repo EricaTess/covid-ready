@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import GoogleMap from './App';
+import App from './App';
+import history from "./utils/history";
+
+
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <GoogleMap />
-  </React.StrictMode>,
+      <App />,
   document.getElementById('root')
 );
 
