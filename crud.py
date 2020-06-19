@@ -12,25 +12,6 @@ def create_user(username, email, password):
 
     return user
 
-def create_measure(measure, max_score):
-    """Create a new measure."""
-
-    measure = Measure(measure=measure, max_score=max_score)
-
-    db.session.add(measure)
-    db.session.commit()
-
-    return measure
-
-def create_measure_rating(score):
-    """Create a new measure rating."""
-
-    measure_rating = Measure_Rating(score=score)
-
-    db.session.add(measure_rating)
-    db.session.commit()
-
-    return measure_rating
 
 def create_rating(place_id, name, score):
     """Create and return a new rating"""
@@ -42,13 +23,22 @@ def create_rating(place_id, name, score):
     db.session.add(rating)
     db.session.commit()
 
-def create_clinic(name, clinic_key):
-    """Create a clinic instance"""
+    return rating
 
-    clinic = Clinic(name=name, clinic_key=clinic_key)
+def get_user(email):
+    """Get User by Username"""
 
-    db.session.add(clinic)
-    db.session.commit()
+    user = User.query.filter_by(email=email).first()
+
+    result = {
+        'email': user.email,
+        'password': user.password
+    }
+    
+    if user is None:
+        print('User does not exist')
+    else:
+        return result
 
 
 

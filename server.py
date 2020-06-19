@@ -66,20 +66,20 @@ def register():
 def login():
     """Login User"""
 
-    email = request.get_json['email']
-    password = request.get_json()['password']
+    email = request.json['email']
+    password = request.json['password']
     result = ""
 
-    # if bcrypt.check_password_hash(rv)/
-    result = {
-        'email': email,
-        'password': password
-    }
+    user = crud.get_user(email) #Gets back dictionary of email and pass
 
-    return jsonify({'result': result})
+    if bcrypt.check_password_hash(user['password'], password):
+        result = jsonify({"success": "Username and password is VALID"})
+    else:
+        result = jsonify({"error":"Invalid username and password"})
+
+    return result
 
     
-
 
 if __name__ == '__main__':
     connect_to_db(app)
