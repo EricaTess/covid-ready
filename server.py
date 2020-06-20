@@ -59,7 +59,7 @@ def register():
         'email': email,
         'password': password
     }
-
+    flash("Successfully Registered")
     return jsonify({'result': result})
 
 @app.route('/users/login', methods=['POST'])
@@ -72,15 +72,25 @@ def login():
 
     user = crud.get_user(email) #Gets back dictionary of email and pass
 
-    if bcrypt.check_password_hash(user['password'], password):
-        result = jsonify({"success": "Username and password is VALID"})
+    if user['username'] == None:
+        print("Username not found")
+        return 
     else:
-        result = jsonify({"error":"Invalid username and password"})
+        username = user['username']
+    
+    #Check if decrypted password is the same password from login 
+    if bcrypt.check_password_hash(user['password'], password):
+
+        result = jsonify({
+            'username': username
+        })
+    else:
+        print("Incorrect password")
+        result = "Invalid"
 
     return result
 
     
-
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

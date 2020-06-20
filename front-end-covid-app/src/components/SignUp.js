@@ -17,6 +17,8 @@ export default class SignUp extends Component {
     onSubmit = (e) => {
         e.preventDefault()
 
+        const { history } = this.props;
+
         const newUser = {
             username: this.state.username,
             email: this.state.email,
@@ -31,7 +33,12 @@ export default class SignUp extends Component {
             body: JSON.stringify(newUser),
         })
         .then(response => response.json())
-        .then(res => console.log('Registered'));
+        .then(res => {
+            console.log('Registered')
+            localStorage.setItem('username', res.username);
+            this.setState({loggedIn: true});
+            history.push('/')
+        })
     }
 
     render() {

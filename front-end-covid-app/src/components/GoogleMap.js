@@ -203,14 +203,6 @@ export default class GoogleMap extends Component {
                           phone={place.formatted_phone_number}
                           // hours={place["opening_hours"]["weekday_text"]}
                           website={place.website}/>
-            <div>
-              {/* {place.name}<br/>
-              {place.formatted_address}<br/>
-              {place.formatted_phone_number}<br/>
-              {/* {place.place_id}</br> */}
-              {/* {place.opening_hours.weekday_text}<br/> */}
-              {/* <a href="{place.website}">Website</a> */}
-            </div>
           </div>
         )
       // })

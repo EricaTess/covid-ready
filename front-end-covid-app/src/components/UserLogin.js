@@ -7,7 +7,9 @@ export default class UserLogin extends Component {
         this.state = {
             email: '',
             password: '',
-            errors: {}
+            errors: {},
+            username: '',
+            loggedIn: false
         }
     }
 
@@ -17,6 +19,7 @@ export default class UserLogin extends Component {
     onSubmit = (e) => {
         e.preventDefault()
 
+        const { history } = this.props;
         const user = {
             email: this.state.email,
             password: this.state.password
@@ -30,7 +33,20 @@ export default class UserLogin extends Component {
             body: JSON.stringify(user),
         })
         .then(response => response.json())
-        .then(res => console.log(res));
+        .then(res => {
+            console.log(res);
+            if (res === "Invalid") {
+                console.log("Login invalid")
+            } else {
+            localStorage.setItem('username', res.username);
+            localStorage.setItem('isLoggedIn', true);
+            this.setState({loggedIn: true});
+            //Redirect to main page when user is logged in
+            history.push('/')
+            }
+        });
+
+        const username = localStorage.getItem('username')
     }
 
     render() {
@@ -67,6 +83,11 @@ export default class UserLogin extends Component {
                     className="btn btn-lg btn-primary btn-block"
                   >
                     Sign in
+                  </button>
+                  <button 
+                    type="submit"
+                    className="btn btn-lg btn-primary btn-block"
+                  >Sign Up
                   </button>
                 </form>
               </div>

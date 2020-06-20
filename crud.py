@@ -30,15 +30,20 @@ def get_user(email):
 
     user = User.query.filter_by(email=email).first()
 
-    result = {
-        'email': user.email,
-        'password': user.password
-    }
-    
     if user is None:
-        print('User does not exist')
-    else:
+        result = {
+            'username': None
+        }
         return result
+    else:
+        result = {
+            'username': user.username,
+            'email': user.email,
+            'password': user.password
+        }
+        return result
+    
+    
 
 
 
