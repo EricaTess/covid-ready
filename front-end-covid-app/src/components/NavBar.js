@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-ro
 
 
 const NavBar = () => {
-
+  
+    
   return (
     <div>
-      <Link to="/login">Log out</Link>
+      <Link to="/login" onClick={() => localStorage.clear()}>Log out</Link>
     </div>
   );
 };

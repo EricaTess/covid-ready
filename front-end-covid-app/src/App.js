@@ -8,19 +8,13 @@ import NavBar from './components/NavBar';
 
 class App extends Component {
 
-  componentDidMount = () => {
-    const loggedIn = localStorage.getItem("isLoggedIn");
-    console.log(loggedIn); 
-  }
-  // const loggedIn = localStorage.getItem("isLoggedIn");
-  // console.log(loggedIn);
 
   render() {
     return (
       <Router>
         <div className="App">
           <div className="container">
-            <Route component={NavBar} />
+            <NavBar />
             <Switch>
               <Route exact path="/login" component={UserLogin} />
               <Route exact path="/" component={GoogleMap} />
