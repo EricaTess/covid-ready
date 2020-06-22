@@ -31,15 +31,14 @@ def get_user(email):
     user = User.query.filter_by(email=email).first()
 
     if user is None:
-        result = {
-            'username': None
-        }
+        result = {'username': None}
         return result
     else:
         result = {
             'username': user.username,
             'email': user.email,
-            'password': user.password
+            'password': user.password,
+            'user_id': user.user_id
         }
         return result
     

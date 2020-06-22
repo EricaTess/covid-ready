@@ -8,7 +8,7 @@ export default class UserLogin extends Component {
         this.state = {
             email: '',
             password: '',
-            username: '',
+            user_id: '',
             loggedIn: false
         }
     }
@@ -39,18 +39,18 @@ export default class UserLogin extends Component {
                 console.log("Login invalid")
                 alert('Login invalid')
             } else {
-            localStorage.setItem('username', res.username);
+            localStorage.setItem('user_id', res.user_id);
             localStorage.setItem('isLoggedIn', true);
-            this.setState({loggedIn: true, username: res.username});
+            this.setState({loggedIn: true, user_id: res.user_id});
             //Redirect to main page when user is logged in
             alert('Successfully logged in!')
             history.push('/')
             }
         });
 
-        const username = localStorage.getItem('username')
-        console.log('isLoggedIn')
-        console.log(this.state.username)
+        // const username = localStorage.getItem('username')
+        // console.log('isLoggedIn')
+        // console.log(this.state.username)
     }
 
     onClick = (e) => {

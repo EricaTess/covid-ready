@@ -41,7 +41,7 @@ def get_ratings():
 
     crud.create_rating(place_id, measure, score)
 
-    return {"did this": "work"}
+    return {"this": "worked"}
 
 @app.route('/users/register', methods=['POST'])
 def register():
@@ -59,7 +59,7 @@ def register():
         'email': email,
         'password': password
     }
-    flash("Successfully Registered")
+
     return jsonify({'result': result})
 
 @app.route('/users/login', methods=['POST'])
@@ -76,13 +76,13 @@ def login():
         print("Username not found")
         return 
     else:
-        username = user['username']
+        user_id = user['user_id']
     
     #Check if decrypted password is the same password from login 
     if bcrypt.check_password_hash(user['password'], password):
 
         result = jsonify({
-            'username': username
+            'user_id': user_id
         })
     else:
         print("Incorrect password")
