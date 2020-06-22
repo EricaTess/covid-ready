@@ -8,7 +8,12 @@ import NavBar from './components/NavBar';
 
 class App extends Component {
 
-
+  componentDidMount = () => {
+    const loggedIn = localStorage.getItem("isLoggedIn");
+    console.log(loggedIn); 
+  }
+  // const loggedIn = localStorage.getItem("isLoggedIn");
+  // console.log(loggedIn);
 
   render() {
     return (

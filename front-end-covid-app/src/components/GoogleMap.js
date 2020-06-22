@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import SimpleRating from './Ratings';
+import Ratings from './Ratings';
 
 const INITIAL_LOCATION = {
   lat: 37.7749,
@@ -182,33 +182,21 @@ export default class GoogleMap extends Component {
 
   render() {
     const clinicJSX = this.state.clinics.map((place) => {
-        // if (place["opening_hours"]["weekday_text"] === undefined) {
-        //   return (
-        //     <div>
-        //       <SimpleRating name={place.name} 
-        //                   address={place.formatted_address} 
-        //                   place_id={place.id}
-        //                   phone={place.formatted_phone_number}
-        //                   website={place.website}/>
-        //     </div>
-        //   )
-        // }
-        // console.log('these are the places: ', place);
-        // console.log(place);
         return (
           <div>
-            <SimpleRating name={place.name} 
-                          address={place.formatted_address} 
-                          place_id={place.id}
-                          phone={place.formatted_phone_number}
-                          // hours={place["opening_hours"]["weekday_text"]}
-                          website={place.website}/>
+            <li>
+                <Ratings name={place.name} 
+                            address={place.formatted_address} 
+                            place_id={place.id}
+                            phone={place.formatted_phone_number}
+                            // hours={place["opening_hours"]["weekday_text"]}
+                            website={place.website}/>
+            </li>
           </div>
         )
-      // })
+
     })
 
-    // console.log(this.state.mapMarkers, 'this is in render')
     return (
       <div>
         <div>
@@ -227,7 +215,9 @@ export default class GoogleMap extends Component {
         <form>
           Clinic Information:
           <div id="clinic-info">
-            {clinicJSX}
+            <ul>
+                {clinicJSX}
+            </ul>
           </div>
         </form>
       </div>  

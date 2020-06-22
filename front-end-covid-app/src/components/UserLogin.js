@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 
 export default class UserLogin extends Component {
@@ -7,7 +8,6 @@ export default class UserLogin extends Component {
         this.state = {
             email: '',
             password: '',
-            errors: {},
             username: '',
             loggedIn: false
         }
@@ -37,16 +37,27 @@ export default class UserLogin extends Component {
             console.log(res);
             if (res === "Invalid") {
                 console.log("Login invalid")
+                alert('Login invalid')
             } else {
             localStorage.setItem('username', res.username);
             localStorage.setItem('isLoggedIn', true);
-            this.setState({loggedIn: true});
+            this.setState({loggedIn: true, username: res.username});
             //Redirect to main page when user is logged in
+            alert('Successfully logged in!')
             history.push('/')
             }
         });
 
         const username = localStorage.getItem('username')
+        console.log('isLoggedIn')
+        console.log(this.state.username)
+    }
+
+    onClick = (e) => {
+        e.preventDefault()
+
+        const { history } = this.props;
+        history.push('/signup')
     }
 
     render() {
@@ -84,11 +95,12 @@ export default class UserLogin extends Component {
                   >
                     Sign in
                   </button>
-                  <button 
-                    type="submit"
-                    className="btn btn-lg btn-primary btn-block"
-                  >Sign Up
-                  </button>
+                    <button 
+                        type="signup"
+                        className="btn btn-lg btn-primary btn-block"
+                        onClick={this.onClick} 
+                    >Sign Up
+                    </button>
                 </form>
               </div>
             </div>

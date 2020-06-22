@@ -1,12 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
 
 
 const NavBar = () => {
 
   return (
     <div>
-      {!localStorage.getItem('isLoggedIn')}
-        <button>Log out</button>
+      <Link to="/login">Log out</Link>
     </div>
   );
 };

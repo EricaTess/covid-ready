@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UserLogin from './UserLogin';
 
 export default class SignUp extends Component {
     constructor() {
@@ -35,6 +36,7 @@ export default class SignUp extends Component {
         .then(response => response.json())
         .then(res => {
             console.log('Registered')
+            console.log(res)
             localStorage.setItem('username', res.username);
             this.setState({loggedIn: true});
             history.push('/')
