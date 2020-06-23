@@ -22,10 +22,13 @@ export default function Ratings(props) {
         // console.log(props.place_id);
         // console.log(event.target.value);
 
+        const userId = localStorage.getItem('user_id')
+
         const data = {
             measure: event.target.name,
             score: event.target.value,
-            place_id: props.place_id
+            place_id: props.place_id,
+            user_id: userId
         };
 
         fetch('/ratings', {

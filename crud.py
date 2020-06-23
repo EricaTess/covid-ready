@@ -13,12 +13,13 @@ def create_user(username, email, password):
     return user.user_id
 
 
-def create_rating(place_id, name, score):
+def create_rating(place_id, name, score, user_id):
     """Create and return a new rating"""
 
     rating = Rating(place_id=place_id, 
                     name=name,
-                    score=score)
+                    score=score,
+                    user_id=user_id)
     
     db.session.add(rating)
     db.session.commit()

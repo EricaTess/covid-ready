@@ -38,8 +38,9 @@ def get_ratings():
     place_id = request.json["place_id"]
     measure = request.json["measure"]
     score = request.json["score"]
+    user_id = request.json["user_id"]
 
-    crud.create_rating(place_id, measure, score)
+    crud.create_rating(place_id, measure, score, user_id)
 
     return {"this": "worked"}
 
