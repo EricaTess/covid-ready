@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
-import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Ratings from './Ratings';
+
 
 const INITIAL_LOCATION = {
   lat: 37.7749,
@@ -16,6 +17,7 @@ export default class GoogleMap extends Component {
       clinics: [],
       clinicId: [],
       currentLocation: INITIAL_LOCATION,
+      redirect: null
     };
     this.googleMapRef = React.createRef();
 
@@ -183,6 +185,15 @@ export default class GoogleMap extends Component {
   }
 
   render() {
+    
+    if (localStorage.length === 0) {
+        this.setState({redirect: '/login'})
+    }
+
+    if (this.state.redirect) {
+        return <Redirect to={this.state.redirect} />
+    }
+
     
     const clinicJSX = this.state.clinics.map((place) => {
         return (
