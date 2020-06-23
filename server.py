@@ -52,15 +52,13 @@ def register():
     email = request.json['email']
     password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')
     
-    crud.create_user(username, email, password)
+    user_id = crud.create_user(username, email, password)
 
     result = {
-        'username': username,
-        'email': email,
-        'password': password
+        'user_id': user_id
     }
 
-    return jsonify({'result': result})
+    return jsonify(result)
 
 @app.route('/users/login', methods=['POST'])
 def login():

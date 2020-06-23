@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import UserLogin from './UserLogin';
 
 export default class SignUp extends Component {
     constructor() {
         super()
         this.state = {
-            username: '',
+            user_id: '',
             email: '',
             password: '',
             errors: {}
         }
+
     }
 
     onChange = (e) => {
@@ -36,8 +38,8 @@ export default class SignUp extends Component {
         .then(response => response.json())
         .then(res => {
             console.log('Registered')
-            console.log(res)
-            localStorage.setItem('username', res.username);
+            console.log('this is res in SIGNUP: ', res)
+            localStorage.setItem('user_id', res.user_id);
             this.setState({loggedIn: true});
             history.push('/')
         })

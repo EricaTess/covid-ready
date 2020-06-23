@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 import Ratings from './Ratings';
 
 const INITIAL_LOCATION = {
@@ -17,10 +18,11 @@ export default class GoogleMap extends Component {
       currentLocation: INITIAL_LOCATION,
     };
     this.googleMapRef = React.createRef();
+
   }
 
   componentDidMount() {
-    
+
     const googleMapScript = document.createElement("script");
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&libraries=places`;
     window.document.body.appendChild(googleMapScript);
@@ -181,6 +183,7 @@ export default class GoogleMap extends Component {
   }
 
   render() {
+    
     const clinicJSX = this.state.clinics.map((place) => {
         return (
           <div>
@@ -194,9 +197,8 @@ export default class GoogleMap extends Component {
             </li>
           </div>
         )
-
+        
     })
-
     return (
       <div>
         <div>

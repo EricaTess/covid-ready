@@ -10,7 +10,7 @@ def create_user(username, email, password):
     db.session.add(user)
     db.session.commit()
 
-    return user
+    return user.user_id
 
 
 def create_rating(place_id, name, score):
