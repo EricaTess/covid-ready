@@ -1,8 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { Rating } from '@material-ui/lab';
+import { Divider } from '@material-ui/core';
+
+import RatingForm from './RatingForm';
+import Ratings from './Ratings';
 
 
 export default function ClinicInfo(props) {
+    const [value] = useState(5)
+    const [review, setReview] = useState(false);
+    const [reviews, setReviews] = useState(false);
+
+    const displayReviewForm = (e) => {
+        e.preventDefault()
+        
+        if (review === !<Ratings />) {
+            setReview(<Ratings />)
+        } else {
+            setReview(!<Ratings />)
+        }
+    }
+
+    const displayReviews = (e) => {
+        e.preventDefault()
+        //Get reviews from backend
+        if (review === !<RatingForm />) {
+            setReview(<RatingForm />)
+        } else {
+            setReview(!<RatingForm />)
+        }
+    }
+
 
     return (
         <div>
@@ -11,6 +41,19 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.address}</Typography>
             <Typography component="legend">{props.hours}</Typography>
             <a href={props.website}>Website</a>
+            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">Overall Score</Typography>
+            <Rating
+                name={"overall-score|".concat(props.place_id)}
+                value={value}
+                readOnly
+            />
+            <button className="leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
+            <button className="view-review-btn" onClick={displayReviews}>View Reviews</button>
+            </Box>
+            <Divider variant="middle"/>
+            {review}
+            {reviews}
         </div>
     )
 }

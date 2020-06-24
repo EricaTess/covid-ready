@@ -4,6 +4,7 @@ import { Divider } from '@material-ui/core';
 
 import Ratings from './Ratings';
 import ClinicInfo from './ClinicInfo';
+import RatingForm from './RatingForm';
 
 
 const INITIAL_LOCATION = {
@@ -199,7 +200,6 @@ export default class GoogleMap extends Component {
     }
 
     
-
     const clinicInfo = this.state.clinics.map((place) => {
         if (place.opening_hours !== undefined) {
             return (
@@ -213,8 +213,8 @@ export default class GoogleMap extends Component {
                                     hours={place.opening_hours.weekday_text}
                                     website={place.website}/>
                         <Divider variant="middle"/>
-                        <Ratings name={place.name}
-                                place_id={place.id}/>
+                        {/* <Ratings name={place.name}
+                                place_id={place.id}/> */}
                     </li>
                     <Divider variant="middle"/>
                   </ul>
@@ -232,8 +232,8 @@ export default class GoogleMap extends Component {
                                     phone={place.formatted_phone_number}
                                     website={place.website}/>
                         <Divider variant="middle"/>
-                        <Ratings name={place.name}
-                                place_id={place.id}/>
+                        {/* <Ratings name={place.name}
+                                place_id={place.id}/> */}
                     </li>
                     <Divider variant="middle"/>
                 </ul>
