@@ -14,9 +14,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="container">
+            <Route exact path="/login" component={UserLogin} />
             <NavBar />
             <Switch>
-              <Route exact path="/login" component={UserLogin} />
               <Route exact path="/" component={GoogleMap} />
               <Route exact path="/signup" component={SignUp} />
             </Switch>

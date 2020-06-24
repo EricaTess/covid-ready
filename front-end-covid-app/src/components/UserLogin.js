@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-
 
 export default class UserLogin extends Component {
     constructor() {
@@ -47,10 +45,6 @@ export default class UserLogin extends Component {
             history.push('/')
             }
         });
-
-        // const username = localStorage.getItem('username')
-        // console.log('isLoggedIn')
-        // console.log(this.state.username)
     }
 
     onClick = (e) => {

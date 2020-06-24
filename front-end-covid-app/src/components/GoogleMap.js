@@ -1,6 +1,9 @@
 import React, { Component, createRef } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
+
 import Ratings from './Ratings';
+import ClinicInfo from './ClinicInfo';
 
 
 const INITIAL_LOCATION = {
@@ -186,6 +189,7 @@ export default class GoogleMap extends Component {
 
   render() {
     
+    // If user ID is not in local storage, direct to login page
     if (localStorage.length === 0) {
         this.setState({redirect: '/login'})
     }
@@ -195,17 +199,55 @@ export default class GoogleMap extends Component {
     }
 
     
+
+    const clinicInfo = this.state.clinics.map((place) => {
+        if (place.opening_hours !== undefined) {
+            return (
+              <div>
+                  <ul>
+                    <li>
+                        <ClinicInfo name={place.name}
+                                    place_id={place.id}
+                                    address={place.formatted_address}
+                                    phone={place.formatted_phone_number}
+                                    hours={place.opening_hours.weekday_text}
+                                    website={place.website}/>
+                    </li>
+                    <Divider variant="middle"/>
+                  </ul>
+                  
+              </div>
+            )
+        } else {
+            return (
+            <div>
+                <ul>
+                    <li>
+                        <ClinicInfo name={place.name}
+                                    place_id={place.id}
+                                    address={place.formatted_address}
+                                    phone={place.formatted_phone_number}
+                                    website={place.website}/>
+                    </li>
+                    <Divider variant="middle"/>
+                </ul>
+            </div>
+            )
+        }
+    })
+    
+    const handleListItem = () => {
+        alert('clicked list item')
+    }
+
     const clinicJSX = this.state.clinics.map((place) => {
         return (
           <div>
-            <li>
-                <Ratings name={place.name} 
-                            address={place.formatted_address} 
-                            place_id={place.id}
-                            phone={place.formatted_phone_number}
-                            // hours={place["opening_hours"]["weekday_text"]}
-                            website={place.website}/>
+            <li onClick={handleListItem}>
+                <Ratings name={place.name}
+                         place_id={place.id}/>
             </li>
+            <Divider variant="middle"/>
           </div>
         )
         
@@ -217,7 +259,6 @@ export default class GoogleMap extends Component {
             type='text'
             id="pac-input"
             placeholder="Search Box"
-
           />
           <div
             id="map"
@@ -226,13 +267,19 @@ export default class GoogleMap extends Component {
           />
         </div> 
         <form>
-          Clinic Information:
-          <div id="clinic-info">
+          Clinics:
+          <div id="clinic-list">
             <ul>
-                {clinicJSX}
+              {clinicJSX}
             </ul>
           </div>
         </form>
+        <div>
+          Clinic Information:
+          <div id='clinic-info'>
+            {clinicInfo}
+          </div>
+        </div>
       </div>  
     )
   }

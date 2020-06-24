@@ -6,21 +6,9 @@ import Box from '@material-ui/core/Box';
 export default function Ratings(props) {
 
 
-    const [value, setValue] = useState()
-//   const [isClicked, setIsClicked] = React.useState(false);
-//   if (!isClicked) {
-//       return (<div onClick={() => {
-//           setIsClicked(!isClicked)
-//       }}>
-//       <Box component="fieldset" mb={3} borderColor="transparent">
-//         <Typography component="legend">{props.name}</Typography>
-//       </Box>
-//       </div>)
-//   }
+    const [value] = useState()
 
     const handleRating = (event) => {
-        // console.log(props.place_id);
-        // console.log(event.target.value);
 
         const userId = localStorage.getItem('user_id')
 
@@ -41,28 +29,26 @@ export default function Ratings(props) {
           .then(response => response.json())
           .then(res => console.log(res));
     }
-    // console.log(props.hours);
-    
 
 
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">{props.name}</Typography>
-        <Typography component="legend">{props.address}</Typography>
-        <Typography component="legend">{props.phoneNumber}</Typography>
-        <Typography component="legend">{props.hours}</Typography>
-        <Typography component="legend"><a href={props.website}>Website</a></Typography>
+        {/* <Typography component="legend">{props.address}</Typography> */}
+        {/* <Typography component="legend">{props.phoneNumber}</Typography> */}
+        {/* <Typography component="legend">{props.hours}</Typography> */}
+        {/* <a href={props.website}>Website</a> */}
       </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Mask Usage</Typography>
+            <Typography component="legend">Overall Score</Typography>
             <Rating
             name={"mask-usage|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
         </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
+        {/* <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
             name={"cleanliness|".concat(props.place_id)}
@@ -85,7 +71,7 @@ export default function Ratings(props) {
             value={value}
             onClick={handleRating}
             />
-        </Box>
+        </Box> */}
     </div>
   );
 }
