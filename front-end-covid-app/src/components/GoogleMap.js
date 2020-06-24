@@ -212,6 +212,9 @@ export default class GoogleMap extends Component {
                                     phone={place.formatted_phone_number}
                                     hours={place.opening_hours.weekday_text}
                                     website={place.website}/>
+                        <Divider variant="middle"/>
+                        <Ratings name={place.name}
+                                place_id={place.id}/>
                     </li>
                     <Divider variant="middle"/>
                   </ul>
@@ -228,6 +231,9 @@ export default class GoogleMap extends Component {
                                     address={place.formatted_address}
                                     phone={place.formatted_phone_number}
                                     website={place.website}/>
+                        <Divider variant="middle"/>
+                        <Ratings name={place.name}
+                                place_id={place.id}/>
                     </li>
                     <Divider variant="middle"/>
                 </ul>
@@ -236,22 +242,6 @@ export default class GoogleMap extends Component {
         }
     })
     
-    const handleListItem = () => {
-        alert('clicked list item')
-    }
-
-    const clinicJSX = this.state.clinics.map((place) => {
-        return (
-          <div>
-            <li onClick={handleListItem}>
-                <Ratings name={place.name}
-                         place_id={place.id}/>
-            </li>
-            <Divider variant="middle"/>
-          </div>
-        )
-        
-    })
     return (
       <div>
         <div>
@@ -266,14 +256,6 @@ export default class GoogleMap extends Component {
             style={{ width: '600px', height: '400px' }}
           />
         </div> 
-        <form>
-          Clinics:
-          <div id="clinic-list">
-            <ul>
-              {clinicJSX}
-            </ul>
-          </div>
-        </form>
         <div>
           Clinic Information:
           <div id='clinic-info'>

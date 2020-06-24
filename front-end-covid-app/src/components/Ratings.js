@@ -34,21 +34,21 @@ export default function Ratings(props) {
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">{props.name}</Typography>
+        {/* <Typography component="legend">{props.name}</Typography> */}
         {/* <Typography component="legend">{props.address}</Typography> */}
         {/* <Typography component="legend">{props.phoneNumber}</Typography> */}
         {/* <Typography component="legend">{props.hours}</Typography> */}
         {/* <a href={props.website}>Website</a> */}
       </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Overall Score</Typography>
+            <Typography component="legend">Mask Usage</Typography>
             <Rating
             name={"mask-usage|".concat(props.place_id)}
             value={value}
             onClick={handleRating}
             />
         </Box>
-        {/* <Box component="fieldset" mb={3} borderColor="transparent">
+        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
             name={"cleanliness|".concat(props.place_id)}
@@ -71,7 +71,7 @@ export default function Ratings(props) {
             value={value}
             onClick={handleRating}
             />
-        </Box> */}
+        </Box>
     </div>
   );
 }
