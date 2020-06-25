@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ClinicInfo from './ClinicInfo';
+import React from 'react';
 
 
 export default function RatingForm(props) {

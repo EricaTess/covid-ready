@@ -28,7 +28,7 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  height: 271px;
+  height: 271px auto;
   width: 500px;
   overflow-y: scroll;
 }
@@ -38,7 +38,7 @@ li {
   padding: 10px;
   text-overflow: ellipsis;
   white-space: wrap;
-  /* overflow: scroll; */
+  overflow: scroll;
 }
 
 li:nth-child(odd) {

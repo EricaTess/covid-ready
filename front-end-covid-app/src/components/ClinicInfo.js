@@ -12,12 +12,13 @@ export default function ClinicInfo(props) {
     const [value] = useState(5)
     const [review, setReview] = useState(false);
     const [reviews, setReviews] = useState(false);
+    
 
     const displayReviewForm = (e) => {
         e.preventDefault()
         
         if (review === !<Ratings />) {
-            setReview(<Ratings />)
+            setReview(<Ratings place_id={props.place_id}/>)
         } else {
             setReview(!<Ratings />)
         }
@@ -26,10 +27,10 @@ export default function ClinicInfo(props) {
     const displayReviews = (e) => {
         e.preventDefault()
         //Get reviews from backend
-        if (review === !<RatingForm />) {
-            setReview(<RatingForm />)
+        if (reviews === !<RatingForm />) {
+            setReviews(<RatingForm />)
         } else {
-            setReview(!<RatingForm />)
+            setReviews(!<RatingForm />)
         }
     }
 

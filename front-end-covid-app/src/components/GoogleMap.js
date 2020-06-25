@@ -1,10 +1,9 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 
-import Ratings from './Ratings';
 import ClinicInfo from './ClinicInfo';
-import RatingForm from './RatingForm';
+
 
 
 const INITIAL_LOCATION = {
@@ -199,45 +198,39 @@ export default class GoogleMap extends Component {
         return <Redirect to={this.state.redirect} />
     }
 
-    
     const clinicInfo = this.state.clinics.map((place) => {
         if (place.opening_hours !== undefined) {
             return (
               <div>
-                  <ul>
-                    <li>
-                        <ClinicInfo name={place.name}
-                                    place_id={place.id}
-                                    address={place.formatted_address}
-                                    phone={place.formatted_phone_number}
-                                    hours={place.opening_hours.weekday_text}
-                                    website={place.website}/>
-                        <Divider variant="middle"/>
-                        {/* <Ratings name={place.name}
-                                place_id={place.id}/> */}
-                    </li>
+                <ul>
+                  <li>
+                    <ClinicInfo name={place.name}
+                                place_id={place.id}
+                                address={place.formatted_address}
+                                phone={place.formatted_phone_number}
+                                hours={place.opening_hours.weekday_text}
+                                website={place.website}/>
                     <Divider variant="middle"/>
-                  </ul>
-                  
+                  </li>
+                  <Divider variant="middle"/>
+                </ul>
               </div>
             )
         } else {
             return (
-            <div>
+              <div>
                 <ul>
-                    <li>
-                        <ClinicInfo name={place.name}
-                                    place_id={place.id}
-                                    address={place.formatted_address}
-                                    phone={place.formatted_phone_number}
-                                    website={place.website}/>
-                        <Divider variant="middle"/>
-                        {/* <Ratings name={place.name}
-                                place_id={place.id}/> */}
-                    </li>
+                  <li>
+                    <ClinicInfo name={place.name}
+                                place_id={place.id}
+                                address={place.formatted_address}
+                                phone={place.formatted_phone_number}
+                                website={place.website}/>
                     <Divider variant="middle"/>
+                  </li>
+                  <Divider variant="middle"/>
                 </ul>
-            </div>
+              </div>
             )
         }
     })

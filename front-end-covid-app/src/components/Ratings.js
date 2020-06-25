@@ -6,78 +6,90 @@ import TextField from '@material-ui/core/TextField';
 
 export default function Ratings(props) {
 
-
-    const [value] = useState()
+    const [rating, setRating] = useState();
+    const [overallScore, setOverallScore] = useState();
+    const [maskScore, setMaskScore] = useState();
+    const [cleanScore, setCleanScore] = useState();
+    const [sixFtScore, setSixFtScore] = useState();
+    const [gloveScore, setGloveScore] = useState();
 
     const handleRating = (event) => {
+        console.log(typeof(event.target.name))
+        console.log(typeof(event.target.value) === 'string')
+        // const name = event.target.name
+        // if (name.includes("mask-usage")) {
+        //     setMaskScore(event.target.value)
+        //     console.log(event.target.value)
+        // }
 
         const userId = localStorage.getItem('user_id')
 
-        const data = {
-            measure: event.target.name,
-            score: event.target.value,
-            place_id: props.place_id,
-            user_id: userId
-        };
+        // const data = {
+        //     measure: event.target.name,
+        //     score: event.target.value,
+        //     place_id: props.place_id,
+        //     text_review: event.target.text_review,
+        //     user_id: userId
+        // };
 
-        fetch('/ratings', {
-            method: 'POST',
-            headers:{
-                "content_type":"application/json",
-            },
-            body: JSON.stringify(data),
-        })
-          .then(response => response.json())
-          .then(res => console.log(res));
+        // fetch('/ratings', {
+        //     method: 'POST',
+        //     headers:{
+        //         "content_type":"application/json",
+        //     },
+        //     body: JSON.stringify(data),
+        // })
+        //   .then(response => response.json())
+        //   .then(res => console.log(res));
     }
 
 
   return (
     <div>
-      <Box component="fieldset" mb={3} borderColor="transparent">
+        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>
             <Rating
-            name={"overall-score|".concat(props.place_id)}
-            value={value}
-            onClick={handleRating}
+                name={"overall-score|".concat(props.place_id)}
+                value={overallScore}
+                onClick={handleRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating
-            name={"mask-usage|".concat(props.place_id)}
-            value={value}
-            onClick={handleRating}
+                name={"mask-usage|".concat(props.place_id)}
+                value={maskScore}
+                onClick={handleRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
-            name={"cleanliness|".concat(props.place_id)}
-            value={value}
-            onClick={handleRating}
+                name={"cleanliness|".concat(props.place_id)}
+                value={cleanScore}
+                onClick={handleRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Six Foot Distancing</Typography>
             <Rating
-            name={"six-foot-distancing|".concat(props.place_id)}
-            value={value}
-            onClick={handleRating}
+                name={"six-foot-distancing|".concat(props.place_id)}
+                value={sixFtScore}
+                onClick={handleRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Glove Usage</Typography>
             <Rating
                 name={"glove-usage|".concat(props.place_id)}
-                value={value}
+                value={gloveScore}
                 onClick={handleRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Leave a review</Typography>
             <TextField id="outlined-basic" variant="outlined" />
-            <button>Submit Review</button>
+            <button onClick={handleRating}>Submit Review</button>
         </Box>
     </div>
   );

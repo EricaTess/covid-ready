@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import UserLogin from './UserLogin';
 
 export default class SignUp extends Component {
     constructor() {
