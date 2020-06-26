@@ -16,7 +16,7 @@ export default function ClinicInfo(props) {
 
     const displayReviewForm = (e) => {
         e.preventDefault()
-        
+         
         if (review === !<Ratings />) {
             setReview(<Ratings place_id={props.place_id}/>)
         } else {
@@ -34,6 +34,16 @@ export default function ClinicInfo(props) {
         }
     }
 
+    
+    const renderHours = () => {
+        if (props.hours !== undefined) {
+            const hours = props.hours.map((item) => {
+                return (<Typography >{item}</Typography>)
+            })
+        }
+    }
+    
+
 
     return (
         <div>
@@ -41,6 +51,7 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>
             <Typography component="legend">{props.hours}</Typography>
+            {renderHours()}
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>

@@ -6,43 +6,69 @@ import TextField from '@material-ui/core/TextField';
 
 export default function Ratings(props) {
 
-    const [rating, setRating] = useState();
-    const [overallScore, setOverallScore] = useState();
-    const [maskScore, setMaskScore] = useState();
-    const [cleanScore, setCleanScore] = useState();
-    const [sixFtScore, setSixFtScore] = useState();
-    const [gloveScore, setGloveScore] = useState();
+    const [overallScore, setOverallScore] = useState('')
+    const [maskScore, setMaskScore] = useState('')
+    const [cleanScore, setCleanScore] = useState('')
+    const [sixFtScore, setSixFtScore] = useState('')
+    const [gloveScore, setGloveScore] = useState('')
+    const [textReview, setTextReview] = useState('')
 
-    const handleRating = (event) => {
-        console.log(typeof(event.target.name))
-        console.log(typeof(event.target.value) === 'string')
-        // const name = event.target.name
-        // if (name.includes("mask-usage")) {
-        //     setMaskScore(event.target.value)
-        //     console.log(event.target.value)
-        // }
+    const handleOverallRating = (event) => {
+        event.preventDefault()
+        setOverallScore(event.target.value)
+    }
+    
+    const handleMaskRating = (event) => {
+        event.preventDefault()
+        setMaskScore(event.target.value)
+    }
+
+    const handleCleanRating = (event) => {
+        event.preventDefault()
+        setCleanScore(event.target.value)
+    }
+
+    const handleSixFtRating = (event) => {
+        event.preventDefault()
+        setSixFtScore(event.target.value)
+    }
+
+    const handleGloveRating = (event) => {
+        event.preventDefault()
+        setGloveScore(event.target.value)
+    }
+
+    const handleTextReview = (event) => {
+        event.preventDefault()
+        setTextReview(event.target.value)
+    }
+
+
+    const handleSubmit = (event) => {
 
         const userId = localStorage.getItem('user_id')
 
-        // const data = {
-        //     measure: event.target.name,
-        //     score: event.target.value,
-        //     place_id: props.place_id,
-        //     text_review: event.target.text_review,
-        //     user_id: userId
-        // };
+        const data = {
+            overall_score: overallScore,
+            mask_score: maskScore,
+            clean_score: cleanScore,
+            six_ft_score: sixFtScore,
+            glove_score: gloveScore,
+            text_review: textReview,
+            place_id: props.place_id,
+            user_id: userId
+        };
 
-        // fetch('/ratings', {
-        //     method: 'POST',
-        //     headers:{
-        //         "content_type":"application/json",
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        //   .then(response => response.json())
-        //   .then(res => console.log(res));
+        fetch('/ratings', {
+            method: 'POST',
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(data),
+        })
+          .then(response => response.json())
+          .then(res => console.log(res));
     }
-
 
   return (
     <div>
@@ -51,45 +77,46 @@ export default function Ratings(props) {
             <Rating
                 name={"overall-score|".concat(props.place_id)}
                 value={overallScore}
-                onClick={handleRating}
+                onChange={handleOverallRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating
                 name={"mask-usage|".concat(props.place_id)}
-                value={maskScore}
-                onClick={handleRating}
+                onChange={handleMaskRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
                 name={"cleanliness|".concat(props.place_id)}
-                value={cleanScore}
-                onClick={handleRating}
+                onChange={handleCleanRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Six Foot Distancing</Typography>
             <Rating
                 name={"six-foot-distancing|".concat(props.place_id)}
-                value={sixFtScore}
-                onClick={handleRating}
+                onChange={handleSixFtRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Glove Usage</Typography>
             <Rating
                 name={"glove-usage|".concat(props.place_id)}
-                value={gloveScore}
-                onClick={handleRating}
+                onChange={handleGloveRating}
             />
         </Box>
         <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Leave a review</Typography>
-            <TextField id="outlined-basic" variant="outlined" />
-            <button onClick={handleRating}>Submit Review</button>
+            <TextField 
+                id="text-review" 
+                onChange={handleTextReview}
+                multiline
+                rows={4}
+                defaultValue="Leave a review"
+                variant="outlined" />
+            <button onClick={handleSubmit}>Submit Review</button>
         </Box>
     </div>
   );

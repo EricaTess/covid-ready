@@ -21,6 +21,8 @@ class User(db.Model):
         return f'<User user_id={self.user_id} username={self.username}>'
 
 
+
+
 class Rating(db.Model):
     """A rating."""
 
@@ -30,8 +32,12 @@ class Rating(db.Model):
                         primary_key=True,
                         autoincrement=True)
     place_id = db.Column(db.String)
-    name = db.Column(db.String)
-    score = db.Column(db.Integer)
+    overall_score = db.Column(db.Integer)
+    mask_score = db.Column(db.Integer)
+    clean_score = db.Column(db.Integer)
+    six_ft_score = db.Column(db.Integer)
+    glove_score = db.Column(db.Integer)
+    text_review = db.Column(db.String(120))
     user_id = db.Column(db.Integer,
                         db.ForeignKey('users.user_id'))
 

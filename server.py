@@ -36,11 +36,16 @@ def get_ratings():
 
     print(request.json)
     place_id = request.json["place_id"]
-    measure = request.json["measure"]
-    score = request.json["score"]
+    overall_score = request.json["overall_score"]
+    mask_score = request.json["mask_score"]
+    clean_score = request.json["clean_score"]
+    six_ft_score = request.json["six_ft_score"]
+    glove_score = request.json["glove_score"]
+    text_review = request.json["text_review"]
     user_id = request.json["user_id"]
 
-    crud.create_rating(place_id, measure, score, user_id)
+    crud.create_rating(place_id, overall_score, mask_score, clean_score, 
+                      six_ft_score, glove_score, text_review, user_id)
 
     return {"this": "worked"}
 
@@ -48,7 +53,7 @@ def get_ratings():
 def register():
     """Register User"""
 
-    print(request.json)
+    # print(request.json)
     username = request.json['username']
     email = request.json['email']
     password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')

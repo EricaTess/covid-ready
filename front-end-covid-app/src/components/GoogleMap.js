@@ -157,11 +157,9 @@ export default class GoogleMap extends Component {
           //Create list with details
           const detailsRequest = {
             placeId: results[i].place_id,
-            fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website']
+            fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website', 'photo']
           }
           
-          // this.setState({clinicId: this.state.clinicId.concat(detailsRequest['placeId'])})
-
           const callback = (place, status) => {
 
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
@@ -199,17 +197,19 @@ export default class GoogleMap extends Component {
     }
 
     const clinicInfo = this.state.clinics.map((place) => {
+
         if (place.opening_hours !== undefined) {
             return (
               <div>
                 <ul>
-                  <li>
+                  <li key={place.id}>
                     <ClinicInfo name={place.name}
                                 place_id={place.id}
                                 address={place.formatted_address}
                                 phone={place.formatted_phone_number}
                                 hours={place.opening_hours.weekday_text}
-                                website={place.website}/>
+                                website={place.website}
+                                photo={place.photo}/>
                     <Divider variant="middle"/>
                   </li>
                   <Divider variant="middle"/>
@@ -220,7 +220,7 @@ export default class GoogleMap extends Component {
             return (
               <div>
                 <ul>
-                  <li>
+                  <li key={place.id}>
                     <ClinicInfo name={place.name}
                                 place_id={place.id}
                                 address={place.formatted_address}
