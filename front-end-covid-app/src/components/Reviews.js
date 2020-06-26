@@ -5,12 +5,6 @@ import RatingForm from './RatingForm';
 export default function Reviews(props) {
 
     const [reviews, setReviews] = useState([])
-    const [overallScore, setOverallScore] = useState('')
-    const [maskScore, setMaskScore] = useState('')
-    const [cleanScore, setCleanScore] = useState('')
-    const [sixFtScore, setSixFtScore] = useState('')
-    const [gloveScore, setGloveScore] = useState('')
-    const [textReview, setTextReview] = useState('')
 
 
     useEffect(() => {
@@ -27,18 +21,25 @@ export default function Reviews(props) {
             setReviews(data)
             })
     }, [])
+
+    // console.log("this is the reviews: ", reviews);
     
-    const getReviews = () => {
-        if (reviews.length > 0) {
-            for (const review in reviews) {
-                
-            }
-        }
-    }
+    const getReviews = reviews.map((review) => {
+        console.log(JSON.stringify(review))
+        return (
+            <div>
+                <ul>
+                    <li>
+                      <RatingForm reviews={review}/> 
+                    </li>
+                </ul>
+            </div>
+        )
+    }) 
 
     return(
         <div>
-            <RatingForm />
+            {getReviews}
         </div>
     )
 
