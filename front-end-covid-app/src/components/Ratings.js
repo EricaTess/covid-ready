@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
+import RatingForm from './RatingForm';
+
 export default function Ratings(props) {
 
     const [overallScore, setOverallScore] = useState('')
@@ -12,6 +14,7 @@ export default function Ratings(props) {
     const [sixFtScore, setSixFtScore] = useState('')
     const [gloveScore, setGloveScore] = useState('')
     const [textReview, setTextReview] = useState('')
+    const [reviews, setReviews] = useState([])
 
     const handleOverallRating = (event) => {
         event.preventDefault()
@@ -45,6 +48,7 @@ export default function Ratings(props) {
 
 
     const handleSubmit = (event) => {
+        event.preventDefault()
 
         const userId = localStorage.getItem('user_id')
 
@@ -67,16 +71,25 @@ export default function Ratings(props) {
             body: JSON.stringify(data),
         })
           .then(response => response.json())
-          .then(res => console.log(res));
+          .then(res => {
+              console.log(res);
+            });
+
+        setOverallScore('')
+        setMaskScore('')
+        setCleanScore('')
+        setSixFtScore('')
+        setGloveScore('')
+        setTextReview('')
     }
 
+    console.log(props.data)
   return (
     <div>
         <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}
-                value={overallScore}
                 onChange={handleOverallRating}
             />
         </Box>
@@ -111,11 +124,11 @@ export default function Ratings(props) {
         <Box component="fieldset" mb={3} borderColor="transparent">
             <TextField 
                 id="text-review" 
-                onChange={handleTextReview}
                 multiline
                 rows={4}
-                defaultValue="Leave a review"
-                variant="outlined" />
+                defaultValue={"Leave a Review"}
+                variant="outlined" 
+                onChange={handleTextReview}/>
             <button onClick={handleSubmit}>Submit Review</button>
         </Box>
     </div>

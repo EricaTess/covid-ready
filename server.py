@@ -28,7 +28,7 @@ def homepage():
     """View homepage"""
 
     return {"status": "test"}
-    # return render_template('front-end-covid-app/public/index.html')
+
 
 @app.route('/ratings', methods=['POST'])
 def get_ratings():
@@ -44,10 +44,20 @@ def get_ratings():
     text_review = request.json["text_review"]
     user_id = request.json["user_id"]
 
-    crud.create_rating(place_id, overall_score, mask_score, clean_score, 
+    result = crud.create_rating(place_id, overall_score, mask_score, clean_score, 
                       six_ft_score, glove_score, text_review, user_id)
 
-    return {"this": "worked"}
+    return jsonify(result)
+
+
+@app.route('/ratings-by-clinic', methods=['POST'])
+def get_ratings_by_clinic():
+    """Get reviews by clinic id"""
+
+    result = crud.get_rating_by_clinic(request.json)
+
+    return jsonify(result)
+
 
 @app.route('/users/register', methods=['POST'])
 def register():

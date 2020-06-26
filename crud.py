@@ -25,11 +25,20 @@ def create_rating(place_id, overall_score, mask_score, clean_score,
                     glove_score=glove_score,
                     text_review=text_review,
                     user_id=user_id)
-    
+
     db.session.add(rating)
     db.session.commit()
 
-    return rating
+    result = {
+        'overall_score': rating.overall_score,
+        'mask_score': rating.mask_score,
+        'clean_score': rating.clean_score,
+        'six_ft_score': rating.six_ft_score,
+        'glove_score': rating.glove_score,
+        'text_review': rating.text_review
+    }
+
+    return result
 
 def get_user(email):
     """Get User by Username"""
@@ -47,9 +56,29 @@ def get_user(email):
             'user_id': user.user_id
         }
         return result
-    
-    
 
+def get_rating_by_clinic(place_id):
+    """Get rating by clinic id"""
+
+    ratings = Rating.query.filter_by(place_id=place_id).all()
+    print('this is what comes back from db', ratings) #list
+    if len(ratings) == 0:
+        return "No Reviews"
+    reviews = []
+    for rating in ratings:
+        review = {
+            'overall_score': rating.overall_score,
+            'mask_score': rating.mask_score,
+            'clean_score': rating.clean_score,
+            'six_ft_score': rating.six_ft_score,
+            'glove_score': rating.glove_score,
+            'text_review': rating.text_review,
+            'user_id': rating.user_id
+        }
+        reviews.append(review)
+
+    return reviews
+    
 
 
 if __name__ == '__main__':

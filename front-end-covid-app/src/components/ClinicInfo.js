@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import { Rating } from '@material-ui/lab';
 import { Divider } from '@material-ui/core';
 
-import RatingForm from './RatingForm';
+import Reviews from './Reviews';
 import Ratings from './Ratings';
 
 
@@ -15,7 +15,7 @@ export default function ClinicInfo(props) {
     
 
     const displayReviewForm = (e) => {
-        e.preventDefault()
+        e.preventDefault();
          
         if (review === !<Ratings />) {
             setReview(<Ratings place_id={props.place_id}/>)
@@ -27,21 +27,21 @@ export default function ClinicInfo(props) {
     const displayReviews = (e) => {
         e.preventDefault()
         //Get reviews from backend
-        if (reviews === !<RatingForm />) {
-            setReviews(<RatingForm />)
+        if (reviews === !<Reviews />) {
+            setReviews(<Reviews place_id={props.place_id}/>)
         } else {
-            setReviews(!<RatingForm />)
+            setReviews(!<Reviews />)
         }
     }
 
     
-    const renderHours = () => {
-        if (props.hours !== undefined) {
-            const hours = props.hours.map((item) => {
-                return (<Typography >{item}</Typography>)
-            })
-        }
-    }
+    // const renderHours = () => {
+    //     if (props.hours !== undefined) {
+    //         const hours = props.hours.map((item) => {
+    //             return ({item})
+    //         })
+    //     }
+    // }
     
 
 
@@ -51,12 +51,12 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>
             <Typography component="legend">{props.hours}</Typography>
-            {renderHours()}
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}
+                precision={.1}
                 value={value}
                 readOnly
             />
