@@ -59,6 +59,15 @@ def get_ratings_by_clinic():
     return jsonify(result)
 
 
+@app.route('/get_overall_score', methods=['POST'])
+def get_overall_score():
+    """Get reviews by clinic id"""
+
+    result = crud.get_overall_score(request.json)
+    print('result: ', result)
+    return jsonify(result)
+
+
 @app.route('/users/register', methods=['POST'])
 def register():
     """Register User"""

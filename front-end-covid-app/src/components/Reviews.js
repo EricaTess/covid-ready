@@ -4,43 +4,41 @@ import RatingForm from './RatingForm';
 
 export default function Reviews(props) {
 
-    const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState([])
 
 
-    useEffect(() => {
-        fetch('/ratings-by-clinic', {
-            method: 'POST',
-            headers:{
-                "content_type":"application/json",
-            },
-            body: JSON.stringify(props.place_id),
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-            setReviews(data)
-            })
-    }, [])
+  useEffect(() => {
+    fetch('/ratings-by-clinic', {
+      method: 'POST',
+      headers:{
+        "content_type":"application/json",
+      },
+      body: JSON.stringify(props.place_id),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setReviews(data)
+      })
+  }, [])
 
-    // console.log("this is the reviews: ", reviews);
-    
     const getReviews = reviews.map((review) => {
         console.log(JSON.stringify(review))
         return (
             <div>
                 <ul>
                     <li>
-                      <RatingForm reviews={review}/> 
+                        <RatingForm reviews={review}/> 
                     </li>
                 </ul>
             </div>
         )
-    }) 
+    })
 
-    return(
-        <div>
-            {getReviews}
-        </div>
-    )
+  return(
+    <div>
+      {getReviews}
+    </div>
+  )
 
 }

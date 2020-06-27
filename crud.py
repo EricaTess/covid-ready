@@ -13,6 +13,7 @@ def create_user(username, email, password):
     return user.user_id
 
 
+
 def create_rating(place_id, overall_score, mask_score, clean_score, 
                 six_ft_score, glove_score, text_review, user_id):
     """Create and return a new rating"""
@@ -40,6 +41,7 @@ def create_rating(place_id, overall_score, mask_score, clean_score,
 
     return result
 
+
 def get_user(email):
     """Get User by Username"""
 
@@ -57,11 +59,12 @@ def get_user(email):
         }
         return result
 
+
 def get_rating_by_clinic(place_id):
     """Get rating by clinic id"""
 
     ratings = Rating.query.filter_by(place_id=place_id).all()
-    print('this is what comes back from db', ratings) #list
+
     if len(ratings) == 0:
         return "No Reviews"
     reviews = []
@@ -78,6 +81,24 @@ def get_rating_by_clinic(place_id):
         reviews.append(review)
 
     return reviews
+
+
+def get_overall_score(place_id):
+    """Get Overall Score"""
+
+    overall_scores = Rating.query.filter_by(place_id=place_id).all()
+
+    if len(overall_scores) == 0:
+        return "No Reviews"
+    scores = []
+    for overall_score in overall_scores:
+        score = {
+            'overall_score': overall_score.overall_score
+        }
+        scores.append(score)
+
+    return scores
+
     
 
 

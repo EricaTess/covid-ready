@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Rating } from '@material-ui/lab';
@@ -9,41 +9,48 @@ import Ratings from './Ratings';
 
 
 export default function ClinicInfo(props) {
-    const [value] = useState(5)
-    const [review, setReview] = useState(false);
-    const [reviews, setReviews] = useState(false);
+    const [review, setReview] = useState([])
+    const [leaveReviews, setLeaveReviews] = useState(false);
+    const [displayReview, setDisplayReview] = useState(false);
+
+    
+    // useEffect(() => {
+    //     fetch('/get_overall_score', {
+    //     method: 'POST',
+    //     headers:{
+    //         "content_type":"application/json",
+    //     },
+    //     body: JSON.stringify(props.place_id),
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log("Clinic Info: ", data)
+    //         setReview(data)
+    //     })
+    // }, [])
+
+    // console.log('Clinic info overall_score: ', data)
     
 
-    const displayReviewForm = (e) => {
+    const leaveReview = (e) => {
         e.preventDefault();
          
-        if (review === !<Ratings />) {
-            setReview(<Ratings place_id={props.place_id}/>)
+        if (leaveReviews === !<Ratings />) {
+            setLeaveReviews(<Ratings place_id={props.place_id}/>)
         } else {
-            setReview(!<Ratings />)
+            setLeaveReviews(!<Ratings />)
         }
     }
 
     const displayReviews = (e) => {
         e.preventDefault()
         //Get reviews from backend
-        if (reviews === !<Reviews />) {
-            setReviews(<Reviews place_id={props.place_id}/>)
+        if (displayReview === !<Reviews />) {
+            setDisplayReview(<Reviews place_id={props.place_id}/>)
         } else {
-            setReviews(!<Reviews />)
+            setDisplayReview(!<Reviews />)
         }
     }
-
-    
-    // const renderHours = () => {
-    //     if (props.hours !== undefined) {
-    //         const hours = props.hours.map((item) => {
-    //             return ({item})
-    //         })
-    //     }
-    // }
-    
-
 
     return (
         <div>
@@ -53,19 +60,19 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.hours}</Typography>
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Overall Score</Typography>
-            <Rating
-                name={"overall-score|".concat(props.place_id)}
-                precision={.1}
-                value={value}
-                readOnly
-            />
-            <button className="leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
-            <button className="view-review-btn" onClick={displayReviews}>View Reviews</button>
+                <Typography component="legend">Overall Score</Typography>
+                <Rating
+                    name={"overall-score|".concat(props.place_id)}
+                    precision={.1}
+                    value={5}
+                    readOnly
+                />
+                <button className="leave-review-btn" onClick={leaveReview}>Leave a Review</button>
+                <button className="view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
             <Divider variant="middle"/>
-            {review}
-            {reviews}
+            {leaveReviews}
+            {displayReview}
         </div>
     )
 }
