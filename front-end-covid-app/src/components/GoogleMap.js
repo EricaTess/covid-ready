@@ -33,7 +33,6 @@ export default function GoogleMap () {
             createGoogleMap()
             createSearchBox()
             createPlaces()
-            createClinicDetails()
         });
 
     }, [])
@@ -115,27 +114,29 @@ export default function GoogleMap () {
 
     const createPlaces = () => { 
         const request = {
-            query: 'medical clinic',
-            location: currentLocation
+              query: 'medical clinic',
+              location: currentLocation
         };
         
         //Clear clinic list
         setClinics([])
         
         const infoWindow = new window.google.maps.InfoWindow();
-
+        // const clinics = []
+        
         //Add markers and window info to each clinic
         const callback = (results, status) => {
-            
+              
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-
+    
                 for (let i = 0; i < results.length; i++) {
                     const marker = new window.google.maps.Marker({
                         position: { lat: results[i].geometry.location.lat(),
-                                lng: results[i].geometry.location.lng() },
-                        map: createGoogleMap()
+                                    lng: results[i].geometry.location.lng() }
                     });
-            
+
+                    // clinics.push(results[i]);
+        
                     marker.addListener('click', () => {
                         infoWindow.setContent(`
                             <div>
@@ -144,47 +145,78 @@ export default function GoogleMap () {
                         infoWindow.open(createGoogleMap(), marker);
                     });
 
-                    //Add Clinics to state
-                    setClinics([...clinics, results[i]])
-
-                    //Add markers to state
-                    setMarkers([...markers, marker])
-
-                    // setMapOnAll(markers)
                     //Set markers on map
-                    // marker.setMap(createGoogleMap());
-                    markers.map((marker) => {
-                        marker.setMap(createGoogleMap())
-                    })
+                    marker.setMap(createGoogleMap());
+        
+                    //Create list with details
+                    const detailsRequest = {
+                    placeId: results[i].place_id,
+                    fields: ['name', 'formatted_address', 'formatted_phone_number', 'opening_hours.weekday_text', 'website', 'photo']
+                    }
+                
+                const callback = (place, status) => {
+                    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                        //ADD CLINIC ID TO PLACE
+                        place["id"] = `${detailsRequest["placeId"]}`;
+                        //Add clinic info to state
+                        const places = clinics.concat(place);
+                        setClinics(places)
+                    }   
+                }
+
+                //KEEP THIS LINE, IT PUSHES TO GLOBAL MARKER TO THEN REMOVE OLD MARKERS
+                markers.push(marker)
+                service.getDetails(detailsRequest, callback);          
                 }
             }
         }
+        //KEEP THIS LINE, REMOVES EACH MARKER
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+        //Create the places service.
         const service = new window.google.maps.places.PlacesService(createGoogleMap());
         service.textSearch(request, callback);
     }
 
-    const createClinicDetails = () => {
+    const clinicInfo = clinics.map((place) => {
 
-        //Create list with details
-        clinics.map((clinic) => {
-            const detailsRequest = {
-                placeId: clinic.place_id,
-                fields: ['name', 'formatted_address', 'formatted_phone_number', 
-                        'opening_hours.weekday_text', 'website', 'photo']
-            }
-            const callback = (place, status) => {
-                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                  //ADD CLINIC ID TO PLACE
-                  place["id"] = `${detailsRequest["placeId"]}`;
-                  //Add clinic info to state
-                  const places = clinics.concat(place);
-                  this.setState({clinics: places})
-                }
-            }
-            const service = new window.google.maps.places.PlacesService(createGoogleMap());
-            service.getDetails(detailsRequest, callback);  
-        })  
-    }
+        if (place.opening_hours !== undefined) {
+            return (
+                <div>
+                <ul>
+                    <li key={place.id}>
+                    <ClinicInfo name={place.name}
+                                place_id={place.id}
+                                address={place.formatted_address}
+                                phone={place.formatted_phone_number}
+                                hours={place.opening_hours.weekday_text}
+                                website={place.website}
+                                photo={place.photo}/>
+                    <Divider variant="middle"/>
+                    </li>
+                    <Divider variant="middle"/>
+                </ul>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                <ul>
+                    <li key={place.id}>
+                    <ClinicInfo name={place.name}
+                                place_id={place.id}
+                                address={place.formatted_address}
+                                phone={place.formatted_phone_number}
+                                website={place.website}/>
+                    <Divider variant="middle"/>
+                    </li>
+                    <Divider variant="middle"/>
+                </ul>
+                </div>
+            )
+        }
+    })
         
     
 
@@ -197,7 +229,7 @@ export default function GoogleMap () {
         <div>
           Clinic Information:
           <div id='clinic-info'>
-            {/* {clinicInfo} */}
+            {clinicInfo}
           </div>
         </div>  
       </div>
