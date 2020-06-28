@@ -84,6 +84,7 @@ def register():
     }
 
     return jsonify(result)
+    
 
 @app.route('/users/login', methods=['POST'])
 def login():

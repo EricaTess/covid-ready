@@ -14,20 +14,22 @@ export default function ClinicInfo(props) {
     const [displayReview, setDisplayReview] = useState(false);
 
     
-    // useEffect(() => {
-    //     fetch('/get_overall_score', {
-    //     method: 'POST',
-    //     headers:{
-    //         "content_type":"application/json",
-    //     },
-    //     body: JSON.stringify(props.place_id),
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log("Clinic Info: ", data)
-    //         setReview(data)
-    //     })
-    // }, [])
+    useEffect(() => {
+        fetch('/get_overall_score', {
+        method: 'POST',
+        headers:{
+            "content_type":"application/json",
+        },
+        body: JSON.stringify(props.place_id),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log("Clinic Info: ", data)
+            setReview(data)
+        })
+
+
+    }, [])
 
     // console.log('Clinic info overall_score: ', data)
     
@@ -52,12 +54,31 @@ export default function ClinicInfo(props) {
         }
     }
 
+    const layoutHours = () => {
+        if (props.hours === undefined) {
+            return
+        }
+        return (
+            <div>
+                {props.hours[0]}<br/>
+                {props.hours[1]}<br/>
+                {props.hours[2]}<br/>
+                {props.hours[3]}<br/>
+                {props.hours[4]}<br/>
+                {props.hours[5]}<br/>
+                {props.hours[6]}<br/>
+            </div>
+        )
+    }
+
     return (
         <div>
             <Typography component="legend">{props.name}</Typography>
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>
-            <Typography component="legend">{props.hours}</Typography>
+            {/* <Typography component="legend">{props.hours}</Typography> */}
+            <Typography component="legend">{layoutHours()}</Typography>
+            
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
                 <Typography component="legend">Overall Score</Typography>

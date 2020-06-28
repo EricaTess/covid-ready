@@ -14,7 +14,6 @@ export default function Ratings(props) {
     const [sixFtScore, setSixFtScore] = useState('')
     const [gloveScore, setGloveScore] = useState('')
     const [textReview, setTextReview] = useState('')
-    const [reviews, setReviews] = useState([])
 
     const handleOverallRating = (event) => {
         event.preventDefault()
