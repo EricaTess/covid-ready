@@ -55,7 +55,7 @@ export default function ClinicInfo(props) {
 
 
     return (
-        <div>
+        <div id={"clinic|".concat(props.place_id)}>
             <Typography component="legend">{props.name}</Typography>
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>

@@ -202,7 +202,7 @@ export default class GoogleMap extends Component {
             return (
               <div>
                 <ul>
-                  <li key={place.id}>
+                  <li key={place.id} class="clinic-list_item">
                     <ClinicInfo name={place.name}
                                 place_id={place.id}
                                 address={place.formatted_address}
@@ -220,7 +220,7 @@ export default class GoogleMap extends Component {
             return (
               <div>
                 <ul>
-                  <li key={place.id}>
+                  <li key={place.id} class="clinic-list_item">
                     <ClinicInfo name={place.name}
                                 place_id={place.id}
                                 address={place.formatted_address}
@@ -236,26 +236,28 @@ export default class GoogleMap extends Component {
     })
     
     return (
-      <div>
-        <div>
-          <input
-            type='text'
-            id="pac-input"
-            placeholder="Search Box"
-          />
-          <div
-            id="map"
-            ref={this.googleMapRef}
-            style={{ width: '600px', height: '400px' }}
-          />
-        </div> 
-        <div>
-          Clinic Information:
-          <div id='clinic-info'>
-            {clinicInfo}
-          </div>
+      <div class="container">
+         <div class="row">
+            <div class="google-map">
+                <input
+                    type='text'
+                    id="pac-input"
+                    placeholder="Search Box"
+                />
+                <div
+                    id="map"
+                    ref={this.googleMapRef}
+                    style={{ width: '600px', height: '400px' }}
+                />
+                </div> 
+                <div class="clinic-info">
+                Clinic Information:
+                <div id="clinic-info">
+                    {clinicInfo}
+                </div>
+            </div>
         </div>
-      </div>  
+    </div>  
     )
   }
 }

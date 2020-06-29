@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import "./userlogin.css"
+
 export default class UserLogin extends Component {
     constructor() {
         super()
@@ -54,13 +56,15 @@ export default class UserLogin extends Component {
         history.push('/signup')
     }
 
+
     render() {
+
         return (
           <div className="container">
             <div className="row">
               <div className="col-md-6 mt-5 mx-auto">
                 <form noValidate onSubmit={this.onSubmit}>
-                  <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                  <h1 className="h3 mb-3 font-weight-normal">Login</h1>
                   <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input
@@ -83,18 +87,20 @@ export default class UserLogin extends Component {
                       onChange={this.onChange}
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="btn btn-lg btn-primary btn-block"
-                  >
-                    Sign in
-                  </button>
-                    <button 
-                        type="signup"
-                        className="btn btn-lg btn-primary btn-block"
-                        onClick={this.onClick} 
-                    >Sign Up
-                    </button>
+                    <div className="buttons">
+                        <button
+                            type="submit"
+                            className="btn btn-lg btn-primary btn-block"
+                        >
+                            Sign in
+                        </button>
+                        <button 
+                            type="signup"
+                            className="btn btn-lg btn-primary btn-block"
+                            onClick={this.onClick} 
+                        >Sign Up
+                        </button>
+                    </div>
                 </form>
               </div>
             </div>

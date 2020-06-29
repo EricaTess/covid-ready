@@ -1,0 +1,46 @@
+.container {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+h1 {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin-top: 6px;
+    min-width: 18em;
+    height: 37px;
+    padding: 0px 10px;
+    font-size: 16px;
+    background-color: #fafaff;
+    border: 0;
+    border-radius: 4px;
+    margin-bottom: 31px;
+    transition: all 250ms ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0px 0px 12px 0.8px #6d8ea0;
+}
+
+.button {
+    margin-top: 2em;
+    display: inline-flex;
+    align-items: center;
+}
