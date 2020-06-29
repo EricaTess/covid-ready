@@ -10,38 +10,47 @@ import Ratings from './Ratings';
 
 export default function ClinicInfo(props) {
     const [value] = useState(5)
-    const [review, setReview] = useState(false);
-    const [reviews, setReviews] = useState(false);
+    const [leaveReview, setLeaveReview] = useState(false);
+    const [showReviews, setShowReviews] = useState(false);
     
 
     const displayReviewForm = (e) => {
         e.preventDefault();
          
-        if (review === !<Ratings />) {
-            setReview(<Ratings place_id={props.place_id}/>)
+        if (leaveReview === !<Ratings />) {
+            setLeaveReview(<Ratings place_id={props.place_id}/>)
         } else {
-            setReview(!<Ratings />)
+            setLeaveReview(!<Ratings />)
         }
     }
 
     const displayReviews = (e) => {
         e.preventDefault()
         //Get reviews from backend
-        if (reviews === !<Reviews />) {
-            setReviews(<Reviews place_id={props.place_id}/>)
+        if (showReviews === !<Reviews />) {
+            setShowReviews(<Reviews place_id={props.place_id}/>)
         } else {
-            setReviews(!<Reviews />)
+            setShowReviews(!<Reviews />)
         }
     }
 
     
-    // const renderHours = () => {
-    //     if (props.hours !== undefined) {
-    //         const hours = props.hours.map((item) => {
-    //             return ({item})
-    //         })
-    //     }
-    // }
+    const layoutHours = () => {
+        if (props.hours === undefined) {
+            return
+        }
+        return (
+            <div>
+                {props.hours[0]}<br/>
+                {props.hours[1]}<br/>
+                {props.hours[2]}<br/>
+                {props.hours[3]}<br/>
+                {props.hours[4]}<br/>
+                {props.hours[5]}<br/>
+                {props.hours[6]}<br/>
+            </div>
+        )
+    }
     
 
 
@@ -50,7 +59,7 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.name}</Typography>
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>
-            <Typography component="legend">{props.hours}</Typography>
+            <Typography component="legend">{layoutHours()}</Typography>
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>
@@ -64,8 +73,8 @@ export default function ClinicInfo(props) {
             <button className="view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
             <Divider variant="middle"/>
-            {review}
-            {reviews}
+            {leaveReview}
+            {showReviews}
         </div>
     )
 }

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 export default function RatingForm(props) {
 
-    console.log('This is the props in RatingForm: ', props.reviews.clean_score)
+    // console.log('This is the props in RatingForm: ', props.reviews.clean_score)
 
     return (
         <div>
