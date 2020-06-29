@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 
 import ClinicInfo from './ClinicInfo';
-import RatingForm from './RatingForm';
+
 
 
 const INITIAL_LOCATION = {
@@ -246,7 +246,7 @@ export default class GoogleMap extends Component {
           <div
             id="map"
             ref={this.googleMapRef}
-            style={{ width: '600px', height: '400px' }}
+            style={{ width: '500px', height: '400px' }}
           />
         </div> 
         <div>

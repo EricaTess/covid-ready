@@ -76,7 +76,6 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{props.name}</Typography>
             <Typography component="legend">{props.phone}</Typography>
             <Typography component="legend">{props.address}</Typography>
-            {/* <Typography component="legend">{props.hours}</Typography> */}
             <Typography component="legend">{layoutHours()}</Typography>
             
             <a href={props.website}>Website</a>

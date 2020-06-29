@@ -4,8 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
-import RatingForm from './RatingForm';
-
 export default function Ratings(props) {
 
     const [overallScore, setOverallScore] = useState('')
@@ -73,16 +71,8 @@ export default function Ratings(props) {
           .then(res => {
               console.log(res);
             });
-
-        setOverallScore('')
-        setMaskScore('')
-        setCleanScore('')
-        setSixFtScore('')
-        setGloveScore('')
-        setTextReview('')
     }
 
-    console.log(props.data)
   return (
     <div>
         <Box component="fieldset" mb={3} borderColor="transparent">

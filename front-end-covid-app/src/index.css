@@ -12,6 +12,20 @@ code {
     monospace;
 }
 
+#App {
+  display: flex;
+}
+
+#map {
+  display: flex;
+  width: '600px'; 
+  height: '400px'; 
+}
+
+#clinic-info {
+  /* display: flex; */
+  /* overflow-y: scroll; */
+}
 
 #pac-input {
     background-color: #fff;
