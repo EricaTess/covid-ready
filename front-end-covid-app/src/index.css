@@ -1,7 +1,4 @@
-html {
-  display: inline-flex;
-  flex-direction: row
-}
+
 
 body {
   margin: 0;
@@ -10,28 +7,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: inline-flex;
-  flex-direction: row
+  background-color: transparent;
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-#
-.container {
-  flex-direction: row
-}
-
-.google-map {
-  order: 1;
-  flex-direction: row
-}
-
-.clinic-info {
-  background-color: red;
-}
 
 #pac-input {
     background-color: #fff;

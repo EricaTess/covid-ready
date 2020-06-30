@@ -86,51 +86,39 @@ export default function Ratings(props) {
     console.log(props.data)
   return (
     <div>
-        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}
                 onChange={handleOverallRating}
             />
-        </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Mask Usage</Typography>
             <Rating
                 name={"mask-usage|".concat(props.place_id)}
                 onChange={handleMaskRating}
             />
-        </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Cleanliness</Typography>
             <Rating
                 name={"cleanliness|".concat(props.place_id)}
                 onChange={handleCleanRating}
             />
-        </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Six Foot Distancing</Typography>
             <Rating
                 name={"six-foot-distancing|".concat(props.place_id)}
                 onChange={handleSixFtRating}
             />
-        </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
             <Typography component="legend">Glove Usage</Typography>
             <Rating
                 name={"glove-usage|".concat(props.place_id)}
                 onChange={handleGloveRating}
-            />
-        </Box>
-        <Box component="fieldset" mb={3} borderColor="transparent">
+            /><br/>
             <TextField 
                 id="text-review" 
                 multiline
                 rows={4}
                 defaultValue={"Leave a Review"}
                 variant="outlined" 
-                onChange={handleTextReview}/>
+                onChange={handleTextReview}/><br/>
             <button onClick={handleSubmit}>Submit Review</button>
-        </Box>
     </div>
   );
 }
