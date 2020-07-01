@@ -29,10 +29,12 @@ code {
 }
 
 .googlemap {
-  min-width: 200px;
-  min-height: 200px;
-  flex: 2;
+  min-width: 350px;
+  min-height: 300px;
+  flex: 8 1;
   padding-bottom: 10px;
+  padding-right: 20px;
+  width: 100%;
 }
 
 .row {
@@ -41,13 +43,18 @@ code {
 
 .clinic-info {
   height: 50vw;
+  width: 100%;
+  min-width: 350px;
+  min-height: 300px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding-top: 0;
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 10px;
-  flex: 1;
+  flex: 1 auto;
+  flex-basis: 35.71429vw;
+
 }
 
 
@@ -66,7 +73,7 @@ code {
 ul {
   /* list-style-type: none; */
   margin: 0;
-  padding-left: 10px;
+  padding-left: 0px;
   /* height: 271px auto; */
   /* width: 500px; */
   /* overflow-y: scroll; */
@@ -86,16 +93,16 @@ li:nth-child(odd) {
 
 .leave-review-btn {
   display: block;
-  color: #6d8ea0;
-  background-color: #fafaff;
+  color: #fafaff;
+  background-color: #6d8ea0;
   border-color: #6d8ea0;
-  width: 30%;
+  width: 50%;
 }
 
 .view-review-btn {
     display: block;
-    color: #6d8ea0;
-    background-color: #fafaff;
+    color: #fafaff;
+    background-color: #6d8ea0;
     border-color: #6d8ea0;
-    width: 30%;
+    width: 50%;
 }

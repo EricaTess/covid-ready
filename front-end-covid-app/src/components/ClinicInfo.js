@@ -27,6 +27,7 @@ export default function ClinicInfo(props) {
     const displayReviews = (e) => {
         e.preventDefault()
         //Get reviews from backend
+
         if (showReviews === !<Reviews />) {
             setShowReviews(<Reviews place_id={props.place_id}/>)
         } else {
@@ -69,8 +70,8 @@ export default function ClinicInfo(props) {
                 value={value}
                 readOnly
             />
-            <button className="leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
-            <button className="view-review-btn" onClick={displayReviews}>View Reviews</button>
+            <button className="btn btn-lg btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
+            <button className="btn btn-lg btn-primary btn-block view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
             <Divider variant="middle"/>
             {leaveReview}

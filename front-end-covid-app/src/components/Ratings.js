@@ -117,7 +117,8 @@ export default function Ratings(props) {
                 defaultValue={"Leave a Review"}
                 variant="outlined" 
                 onChange={handleTextReview}/><br/>
-            <button onClick={handleSubmit}>Submit Review</button>
+            <button className="btn btn-lg btn-primary btn-block" 
+                    onClick={handleSubmit}>Submit Review</button>
     </div>
   );
 }
