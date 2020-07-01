@@ -17,13 +17,13 @@ export default function RatingForm(props) {
                 value={props.reviews.overall_score}
                 readOnly
             />
-            <Typography component="legend">Mask Usage</Typography>
+            <Typography component="legend">Mask Requirement</Typography>
             <Rating
                 name={"mask-usage|".concat(props.place_id)}
                 value={props.reviews.mask_score}
                 readOnly
             />
-            <Typography component="legend">Cleanliness</Typography>
+            <Typography component="legend">Hand Sanitizer Availibility</Typography>
             <Rating
                 name={"cleanliness|".concat(props.place_id)}
                 value={props.reviews.clean_score}
@@ -35,7 +35,7 @@ export default function RatingForm(props) {
                 value={props.reviews.six_ft_score}
                 readOnly
             />
-            <Typography component="legend">Glove Usage</Typography>
+            <Typography component="legend">Proper PPE</Typography>
             <Rating
                 name={"glove-usage|".concat(props.place_id)}
                 value={props.reviews.glove_score}
@@ -49,7 +49,6 @@ export default function RatingForm(props) {
                 variant="outlined" 
                 disabled
             />
-            {/* <Divider variant="middle"/> */}
         </div>
     )
 

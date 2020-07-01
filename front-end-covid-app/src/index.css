@@ -10,7 +10,7 @@ body {
   background-color: transparent;
   background-image: url(./img/clay-banks-e6pK_snssSY-unsplash.jpg);
   background-position: center;
-  opacity: 0.85;
+  /* opacity: 0.85; */
   background-size: cover;
 }
 
@@ -36,6 +36,10 @@ code {
     monospace;
 }
 
+.App {
+  background-color:
+}
+
 .maps-container {
   height: auto;
   display: flex;
@@ -43,14 +47,14 @@ code {
   align-content: center;
   padding-left: 40px;
   padding-right: 40px;
-  padding-bottom: 40px;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .googlemap {
   min-width: 350px;
   min-height: 300px;
   flex: 8 1;
+  padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 20px;
   width: 100%;
@@ -61,19 +65,17 @@ code {
 }
 
 .clinic-info {
-  height: 50vw;
+  height: 40vw;
   width: 100%;
   min-width: 350px;
   min-height: 300px;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-top: 0;
+  padding-top: 0px;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 10px;
   flex: 1 auto;
   flex-basis: 35.71429vw;
-  opacity: 1;
 }
 
 #pac-input {
@@ -141,13 +143,14 @@ li {
   text-overflow: ellipsis;
   white-space: wrap;
   overflow: scroll;
-}
-
-li:nth-child(odd) {
   background-color: #fafaff;
 }
 
-.leave-review-btn {
+/* li:nth-child(odd) {
+  background-color: #fafaff;
+} */
+
+.btn-primary .leave-review-btn {
   display: block;
   color: #fafaff;
   background-color: #6d8ea0;
@@ -167,10 +170,113 @@ li:nth-child(odd) {
   border-color: #6d8ea0;
 }
 
-.view-review-btn {
+.btn-primary .view-review-btn {
   display: block;
   color: #fafaff;
   background-color: #6d8ea0;
   border-color: #6d8ea0;
   width: 100%;
+}
+
+
+/* User Login and Registration */
+
+
+.container-login {
+  text-align: center;
+  
+}
+
+.container-signup {
+  text-align: center;
+}
+
+h1 {
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+
+form {
+
+  display: inline-block;
+  padding-top: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 2em;
+  border-radius: 10px;
+
+}
+
+label {
+
+  text-align: left;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.form-group {
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+input {
+
+  margin-top: 6px;
+  min-width: 18em;
+  height: 37px;
+  padding: 0px 10px;
+  font-size: 16px;
+  background-color: #fafaff;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: all 250ms ease-in-out;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+input:hover {
+
+  outline: none;
+  box-shadow: 0px 0px 12px 0.8px #192a51;
+
+}
+
+.buttons {
+
+  margin-top: 2em;
+  display: inline-flex;
+  align-items: center;
+  float: center;
+  background-color: transparent;
+
+}
+
+.btn-primary {
+
+  color: #6d8ea0;
+  border-color: #fafaff;
+  background-color: transparent;
+
+}
+
+.btn-primary:hover {
+
+  background-color: #6d8ea0;
+  color: #fafaff;
+
+}
+
+.button:focus {
+  background-color: #6d8ea0;
+  border-color: #fafaff;
+  color: #fafaff;
+  outline: none;
+  box-shadow: 0px 0px 12px 0.8px #192a51;
 }

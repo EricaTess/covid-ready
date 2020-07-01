@@ -148,7 +148,8 @@ export default class GoogleMap extends Component {
           marker.addListener('click', () => {
             infoWindow.setContent(`
               <div>
-                <h3>${results[i].name}</h3>
+                <p>${results[i].name}</p>
+                <p>${results[i].formatted_address}</p>
               </div>`)
             infoWindow.open(this.googleMap, marker);
           });

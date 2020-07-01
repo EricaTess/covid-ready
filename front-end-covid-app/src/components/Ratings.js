@@ -90,12 +90,12 @@ export default function Ratings(props) {
                 name={"overall-score|".concat(props.place_id)}
                 onChange={handleOverallRating}
             />
-            <Typography component="legend">Mask Usage</Typography>
+            <Typography component="legend">Mask Requirement</Typography>
             <Rating
                 name={"mask-usage|".concat(props.place_id)}
                 onChange={handleMaskRating}
             />
-            <Typography component="legend">Cleanliness</Typography>
+            <Typography component="legend">Hand Sanitizer Availibility</Typography>
             <Rating
                 name={"cleanliness|".concat(props.place_id)}
                 onChange={handleCleanRating}
@@ -105,7 +105,7 @@ export default function Ratings(props) {
                 name={"six-foot-distancing|".concat(props.place_id)}
                 onChange={handleSixFtRating}
             />
-            <Typography component="legend">Glove Usage</Typography>
+            <Typography component="legend">Proper PPE</Typography>
             <Rating
                 name={"glove-usage|".concat(props.place_id)}
                 onChange={handleGloveRating}
