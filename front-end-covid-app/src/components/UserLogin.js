@@ -13,9 +13,12 @@ export default class UserLogin extends Component {
         }
     }
 
+
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
+
+
     onSubmit = (e) => {
         e.preventDefault()
 
@@ -48,6 +51,7 @@ export default class UserLogin extends Component {
         });
     }
 
+
     onClick = (e) => {
         e.preventDefault()
 
@@ -61,7 +65,6 @@ export default class UserLogin extends Component {
         return (
             <div className="container-login">
               <div className="logo">
-              {/* <img src=”apple-touch-icon.png” alt=”image title” /> */}
               </div>
                 <form noValidate onSubmit={this.onSubmit}>
                   <h1 className="h3 mb-3 font-weight-normal">Login</h1>

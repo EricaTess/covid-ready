@@ -8,10 +8,8 @@ from flask_cors import CORS
 import json
 from flask_bcrypt import Bcrypt
 
-# import googlemaps
 import crud
 import model
-# import seed_database 
 
 from model import connect_to_db, db
 
@@ -20,14 +18,6 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 cors = CORS(app)
 bcrypt = Bcrypt(app)
-
-
-# Replace this with routes and view functions!
-@app.route('/')
-def homepage():
-    """View homepage"""
-
-    return {"status": "test"}
 
 
 @app.route('/ratings', methods=['POST'])
@@ -63,7 +53,6 @@ def get_ratings_by_clinic():
 def register():
     """Register User"""
 
-    # print(request.json)
     username = request.json['username']
     email = request.json['email']
     password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')

@@ -25,11 +25,10 @@ export default class GoogleMap extends Component {
       redirect: null
     };
     this.googleMapRef = React.createRef();
-
   }
 
-  componentDidMount() {
 
+  componentDidMount() {
     const googleMapScript = document.createElement("script");
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDtkAQdVxlPIJeGjfRUhYRizL35fLxm9V8&libraries=places`;
     window.document.body.appendChild(googleMapScript);
@@ -42,6 +41,7 @@ export default class GoogleMap extends Component {
       this.places = this.createPlaces();
     });
   }
+
 
   getGeoLocation = () => {
     if (navigator.geolocation) {
@@ -56,7 +56,7 @@ export default class GoogleMap extends Component {
     }
   }
 
-  // Create the map.
+
   createGoogleMap = () => {
     const map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 14,
@@ -70,6 +70,7 @@ export default class GoogleMap extends Component {
       });
     return map;
   }
+
 
   createSearchBox = () => {
     const input = document.getElementById('pac-input');
@@ -110,11 +111,13 @@ export default class GoogleMap extends Component {
     });
   }
 
+
   setMapOnAll = () => {
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(this.googleMap);
     }
   }
+
 
   deleteMarker = () => {
     this.setMapOnAll(null);
@@ -143,7 +146,6 @@ export default class GoogleMap extends Component {
             position: { lat: results[i].geometry.location.lat(),
                          lng: results[i].geometry.location.lng() }
           });
-          // clinics.push(results[i]);
 
           marker.addListener('click', () => {
             infoWindow.setContent(`

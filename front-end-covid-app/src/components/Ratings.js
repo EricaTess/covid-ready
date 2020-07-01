@@ -3,7 +3,6 @@ import { Rating } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-import RatingForm from './RatingForm';
 
 export default function Ratings(props) {
 
