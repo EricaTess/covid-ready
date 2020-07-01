@@ -32,7 +32,7 @@ Search clinics by city and review
 #### Requirements:
 
 - PostgreSQL
-- Python 3
+- Python 3.7.3
 - Google Maps/Places API key
 
 To have this app running on your local computer, please follow the below steps:
