@@ -40,7 +40,7 @@ export default function RatingForm(props) {
                 name={"glove-usage|".concat(props.place_id)}
                 value={props.reviews.glove_score}
                 readOnly
-            />
+            /><br/>
             <TextField 
                 id="text-review" 
                 multiline
@@ -49,7 +49,7 @@ export default function RatingForm(props) {
                 variant="outlined" 
                 disabled
             />
-            <Divider variant="middle"/>
+            {/* <Divider variant="middle"/> */}
         </div>
     )
 

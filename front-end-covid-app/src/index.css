@@ -10,7 +10,14 @@ body {
   background-color: transparent;
 }
 
+.navbar {
+  background-color: #6d8ea0;
+}
 
+a {
+  color: #fafaff;
+  text-align-last: left;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -25,7 +32,7 @@ code {
   padding-left: 2vw;
   padding-right: 2vw;
   padding-bottom: 2vw;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .googlemap {
@@ -60,7 +67,7 @@ code {
 
 
 #pac-input {
-    background-color: #fff;
+    background-color: #fafaff;
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
@@ -96,7 +103,13 @@ li:nth-child(odd) {
   color: #fafaff;
   background-color: #6d8ea0;
   border-color: #6d8ea0;
-  width: 50%;
+  width: 100%;
+}
+
+.leave-review-btn:hover {
+  color: #6d8ea0;
+  background-color: #fafaff;
+  border-color: #6d8ea0;
 }
 
 .view-review-btn {
@@ -104,5 +117,5 @@ li:nth-child(odd) {
     color: #fafaff;
     background-color: #6d8ea0;
     border-color: #6d8ea0;
-    width: 50%;
+    width: 100%;
 }

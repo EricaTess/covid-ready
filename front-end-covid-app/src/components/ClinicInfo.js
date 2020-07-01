@@ -73,7 +73,7 @@ export default function ClinicInfo(props) {
             <button className="btn btn-lg btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
             <button className="btn btn-lg btn-primary btn-block view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
-            <Divider variant="middle"/>
+            {/* <Divider variant="middle"/> */}
             {leaveReview}
             {showReviews}
         </div>

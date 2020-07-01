@@ -60,8 +60,6 @@ export default class UserLogin extends Component {
     render() {
 
         return (
-        //   <div className="container">
-            //   <div className="col-xl-6 mt-5 mx-auto">
             <div className="container-login">
               <div className="logo">
                   {/* <img src={logoImg} /> */}
@@ -104,7 +102,6 @@ export default class UserLogin extends Component {
                     </button>
                 </form>
             </div>
-        //   </div>
         )
     }
 }
