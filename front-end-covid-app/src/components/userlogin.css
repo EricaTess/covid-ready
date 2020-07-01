@@ -12,6 +12,10 @@ html {
 
 }
 
+.container-signup {
+    text-align: center;
+}
+
 h1 {
 
     display: flex;

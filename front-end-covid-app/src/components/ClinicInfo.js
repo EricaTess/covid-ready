@@ -62,7 +62,7 @@ export default function ClinicInfo(props) {
             <Typography component="legend">{layoutHours()}</Typography>
             <a href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Overall Score</Typography>
+            <Typography component="legend">Average Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}
                 precision={.1}

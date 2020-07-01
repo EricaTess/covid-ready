@@ -22,24 +22,40 @@ export default function Reviews(props) {
             })
     }, [])
 
-    // console.log("this is the reviews: ", reviews);
-    
-    const getReviews = reviews.map((review) => {
-        console.log(JSON.stringify(review))
-        return (
-            <div>
-                <ul>
-                    <li>
-                      <RatingForm reviews={review}/> 
-                    </li>
-                </ul>
-            </div>
-        )
-    }) 
+
+    const getReviews = () => {
+        console.log('in getReviews', reviews)
+        const jsx = []
+        if (reviews & reviews.length === 0) {
+            return (
+                <div>
+                    <ul>
+                        <li>
+                            No reviews! Rate this clinic.
+                        </li>
+                    </ul>
+                </div>
+            )
+        }
+        reviews.map((review) => {
+            console.log(JSON.stringify(review))
+            jsx.push(
+                <div>
+                    <ul>
+                        <li>
+                          <RatingForm reviews={review}/> 
+                        </li>
+                    </ul>
+                </div>
+            )
+        }) 
+        return jsx;
+    }
+
 
     return(
         <div>
-            {getReviews}
+            {getReviews()}
         </div>
     )
 

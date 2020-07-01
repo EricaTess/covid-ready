@@ -43,10 +43,16 @@ export default class SignUp extends Component {
         })
     }
 
+    onClick = (e) => {
+      e.preventDefault()
+
+      const { history } = this.props;
+      history.push('/login')
+  }
+
     render() {
         return (
-          <div className="container">
-            <div className="row">
+          <div className="container-signup">
               <div className="col-md-6 mt-5 mx-auto">
                 <form noValidate onSubmit={this.onSubmit}>
                   <h1 className="h3 mb-3 font-weight-normal">Register</h1>
@@ -90,9 +96,14 @@ export default class SignUp extends Component {
                   >
                     Register!
                   </button>
+                  <button 
+                        type="login"
+                        className="btn btn-lg btn-primary btn-block"
+                        onClick={this.onClick} 
+                    >Login
+                    </button>
                 </form>
               </div>
-            </div>
           </div>
         )
       }

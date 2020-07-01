@@ -63,7 +63,7 @@ def get_rating_by_clinic(place_id):
     ratings = Rating.query.filter_by(place_id=place_id).all()
     print('this is what comes back from db', ratings) #list
     if len(ratings) == 0:
-        return "No Reviews"
+        return []
     reviews = []
     for rating in ratings:
         review = {
