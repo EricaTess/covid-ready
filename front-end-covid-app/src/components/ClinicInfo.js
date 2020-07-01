@@ -70,7 +70,7 @@ export default function ClinicInfo(props) {
                 value={value}
                 readOnly
             />
-            <button className="btn btn-lg btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Leave a Review</button>
+            <button className="btn btn-lg btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Rate Clinic</button>
             <button className="btn btn-lg btn-primary btn-block view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
             {/* <Divider variant="middle"/> */}
