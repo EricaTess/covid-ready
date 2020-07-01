@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
+import { BrowserRouter as Redirect, } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 
 import ClinicInfo from './ClinicInfo';

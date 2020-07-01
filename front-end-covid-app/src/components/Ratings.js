@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Rating } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
 import RatingForm from './RatingForm';

@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Rating } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
-import { Divider } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 
 
