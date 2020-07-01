@@ -83,9 +83,8 @@ export default function Ratings(props) {
         setTextReview('')
     }
 
-    console.log(props.data)
   return (
-    <div>
+    <div className="rating-form">
             <Typography component="legend">Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}

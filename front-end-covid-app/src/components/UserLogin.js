@@ -62,7 +62,7 @@ export default class UserLogin extends Component {
         return (
         //   <div className="container">
             //   <div className="col-xl-6 mt-5 mx-auto">
-            <div className="container">
+            <div className="container-login">
               <div className="logo">
                   {/* <img src={logoImg} /> */}
               </div>

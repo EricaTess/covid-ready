@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 
 import ClinicInfo from './ClinicInfo';
+import NavBar from './NavBar';
+
 
 
 
@@ -130,7 +132,6 @@ export default class GoogleMap extends Component {
     this.setState({clinics: []})
 
     const infoWindow = new window.google.maps.InfoWindow();
-    // const clinics = []
 
     //Add markers and window info to each clinic
     const callback = (results, status) => {
@@ -186,6 +187,7 @@ export default class GoogleMap extends Component {
   }
 
   render() {
+
     
     // If user ID is not in local storage, direct to login page
     if (localStorage.length === 0) {
@@ -200,7 +202,7 @@ export default class GoogleMap extends Component {
 
         if (place.opening_hours !== undefined) {
             return (
-              <div>
+              <div className="clinics">
                 <ul>
                   <li key={place.id} class="clinic-list_item">
                     <ClinicInfo name={place.name}
@@ -218,8 +220,8 @@ export default class GoogleMap extends Component {
             )
         } else {
             return (
-              <div>
-                <ul>
+              <div className="clinics">
+                <ul class="clinic-lists">
                   <li key={place.id} class="clinic-list_item">
                     <ClinicInfo name={place.name}
                                 place_id={place.id}
@@ -236,28 +238,26 @@ export default class GoogleMap extends Component {
     })
     
     return (
-      <div class="container">
-         <div class="row">
-            <div class="google-map">
-                <input
-                    type='text'
-                    id="pac-input"
-                    placeholder="Search Box"
-                />
-                <div
-                    id="map"
-                    ref={this.googleMapRef}
-                    style={{ width: '600px', height: '400px' }}
-                />
-                </div> 
-                <div class="clinic-info">
-                Clinic Information:
-                <div id="clinic-info">
-                    {clinicInfo}
-                </div>
-            </div>
+      <div>
+        <NavBar />
+        <div class="maps-container">
+        <input
+            type='text'
+            id="pac-input"
+            placeholder="Enter a city"
+        />
+        <div
+            id="map"
+            className="googlemap"
+            ref={this.googleMapRef}
+            style={{ height: 'auto', width: '600px' }}
+        >
+        </div> 
+        <div class="col-xs-12 col-md-7 clinic-info">
+            {clinicInfo}
         </div>
-    </div>  
+      </div>
+      </div>
     )
   }
 }

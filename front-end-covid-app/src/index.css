@@ -17,6 +17,28 @@ code {
     monospace;
 }
 
+.maps-container {
+  display: inline-flex;
+  align-content: center;
+  padding-left: 7.14286vw;
+  padding-right: 7.14286vw;
+  padding-bottom: 7.14286vw;
+  padding-top: 10px;
+}
+
+.row {
+  display: inline-flex;
+
+}
+
+.clinic-info {
+  height: 43vw;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top: 0;
+}
+
+
 
 #pac-input {
     background-color: #fff;
@@ -30,22 +52,37 @@ code {
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+  /* list-style-type: none; */
   margin: 0;
-  height: 271px auto;
-  width: 500px;
-  overflow-y: scroll;
+  /* height: 271px auto; */
+  /* width: 500px; */
+  /* overflow-y: scroll; */
 }
 
 li {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   padding: 10px;
-  text-overflow: ellipsis;
-  white-space: wrap;
+  /* text-overflow: ellipsis; */
+  /* white-space: wrap; */
   overflow: scroll;
 }
 
 li:nth-child(odd) {
-  background-color: #fcfcfc;
+  background-color: #fafaff;
+}
+
+.leave-review-btn {
+  display: block;
+  color: #6d8ea0;
+  background-color: #fafaff;
+  border-color: #6d8ea0;
+  width: 30%;
+}
+
+.view-review-btn {
+    display: block;
+    color: #6d8ea0;
+    background-color: #fafaff;
+    border-color: #6d8ea0;
+    width: 30%;
 }
