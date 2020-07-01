@@ -22,13 +22,11 @@ __APIs:__ Google Maps API, Google Places API <br/>
 
 Register or login to access clinic reviews
 
+![Login](/front-end-covid-app/src/img/login.gif)
+</br></br></br>
 
-Search clinics in your area
-
-Add a review
-
-View all reviews
-
+Search clinics by city and review
+![Search/Review](/front-end-covid-app/src/img/nav-review.gif)
 
 ## <a name="installation"></a>Setup/Installation
 
