@@ -43,7 +43,6 @@ export default class UserLogin extends Component {
             localStorage.setItem('isLoggedIn', true);
             this.setState({loggedIn: true, user_id: res.user_id});
             //Redirect to main page when user is logged in
-            alert('Successfully logged in!')
             history.push('/')
             }
         });
@@ -62,7 +61,7 @@ export default class UserLogin extends Component {
         return (
             <div className="container-login">
               <div className="logo">
-                  {/* <img src={logoImg} /> */}
+              {/* <img src=”apple-touch-icon.png” alt=”image title” /> */}
               </div>
                 <form noValidate onSubmit={this.onSubmit}>
                   <h1 className="h3 mb-3 font-weight-normal">Login</h1>
