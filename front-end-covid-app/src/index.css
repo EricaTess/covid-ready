@@ -119,3 +119,38 @@ li:nth-child(odd) {
     border-color: #6d8ea0;
     width: 100%;
 }
+
+
+/* CLINIC INFO */
+.clinic_information {
+  color: #6d8ea0;
+}
+
+.clinic-name {
+  font-weight: 500;
+  color: #192a51;
+}
+
+.phone {
+  font-size: smaller;
+  font-weight: 300;
+}
+
+.address {
+  font-size: smaller;
+  font-weight: 300;
+}
+
+.hours {
+  font-size: smaller;
+  font-weight: 200;
+}
+
+.website {
+  color: #6d8ea0;
+}
+
+fieldset {
+  font-size: smaller;
+  font-weight: 300;
+}

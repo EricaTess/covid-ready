@@ -250,7 +250,7 @@ export default class GoogleMap extends Component {
             id="map"
             className="googlemap"
             ref={this.googleMapRef}
-            style={{ height: 'auto', width: '600px' }}
+            style={{ height: 'auto', width: '500px' }}
         >
         </div> 
         <div class="col-xs-12 col-md-7 clinic-info">

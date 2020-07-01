@@ -6,8 +6,8 @@ const NavBar = () => {
   
     
   return (
-    <div className="navbar">
-      <Link to="/login" onClick={() => localStorage.clear()}>Log out</Link>
+    <div className="navbar m1-auto">
+      <Link to="/login" onClick={() => localStorage.clear()} className="m1-auto">Log out</Link>
     </div>
   );
 };

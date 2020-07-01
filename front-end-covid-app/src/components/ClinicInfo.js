@@ -56,14 +56,14 @@ export default function ClinicInfo(props) {
 
 
     return (
-        <div id={"clinic|".concat(props.place_id)}>
-            <Typography component="legend">{props.name}</Typography>
-            <Typography component="legend">{props.phone}</Typography>
-            <Typography component="legend">{props.address}</Typography>
-            <Typography component="legend">{layoutHours()}</Typography>
-            <a href={props.website}>Website</a>
+        <div className="clinic-information" id={"clinic|".concat(props.place_id)}>
+            <p className="clinic-name">{props.name}</p>
+            <p className="phone">{props.phone}</p>
+            <p className="address">{props.address}</p>
+            <p className="hours">{layoutHours()}</p>
+            <a className="website" href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">Average Overall Score</Typography>
+            Average Overall Score<br/>
             <Rating
                 name={"overall-score|".concat(props.place_id)}
                 precision={.1}
@@ -76,6 +76,7 @@ export default function ClinicInfo(props) {
             {/* <Divider variant="middle"/> */}
             {leaveReview}
             {showReviews}
-        </div>
+        </div> 
+        
     )
 }
