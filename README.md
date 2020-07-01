@@ -53,6 +53,14 @@ Install dependencies:
 ```
 $ pip3 install -r requirements.txt
 ```
+Start server:
+```
+(env) $ python3 server.py
+```
+Navigate to front-end-covid-app folder in another terminal window:
+```
+$ npm start
+```
 
 Get your own Google Maps/Place API key at [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
