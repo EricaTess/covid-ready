@@ -2,15 +2,15 @@
 
 ## Summary
 COVID Ready is a crowd sourced application that allows patients to 
-rate clinics based on their COVID readiness. Patients are given the opportunity 
+rate clinics based on COVID readiness. Patients are given the opportunity 
 to review the clinics ratings and seek care based off their needs.
 
 ## Table of Contents
 
-* [About the Developer](#about)
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [Setup/Installation](#installation)
+* [About the Developer](#about)
 
 ## <a name="tech-stack"></a>Tech Stack
 
@@ -22,13 +22,10 @@ __APIs:__ Google Maps API, Google Places API <br/>
 
 Register or login to access clinic reviews
 
+![Login](/front-end-covid-app/src/img/login.gif)
 
-Search clinics in your area
-
-Add a review
-
-View all reviews
-
+Search clinics by city and review
+![Search/Review](/front-end-covid-app/src/img/nav-review.gif)
 
 ## <a name="installation"></a>Setup/Installation
 
@@ -44,7 +41,7 @@ Clone repository:
 ```
 $ git clone https://github.com/EricaTess/covid-ready.git
 ```
-Create a virtual environment🔮:
+Create a virtual environment:
 ```
 $ virtualenv env
 ```
@@ -52,7 +49,7 @@ Activate the virtual environment:
 ```
 $ source env/bin/activate
 ```
-Install dependencies🔗:
+Install dependencies:
 ```
 $ pip3 install -r requirements.txt
 ```
