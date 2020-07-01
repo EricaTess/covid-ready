@@ -8,15 +8,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: transparent;
+  background-image: url(./img/clay-banks-e6pK_snssSY-unsplash.jpg);
+  background-position: center;
+  opacity: 0.85;
+  background-size: cover;
 }
 
 .navbar {
   background-color: #6d8ea0;
 }
 
+.app-name {
+  color: #fafaff;
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Raleway', sans-serif;
+}
+
 a {
   color: #fafaff;
   text-align-last: left;
+  font-family: 'Raleway', sans-serif;
 }
 
 code {
@@ -29,9 +41,9 @@ code {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  padding-bottom: 2vw;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
   padding-top: 20px;
 }
 
@@ -61,10 +73,8 @@ code {
   padding-bottom: 10px;
   flex: 1 auto;
   flex-basis: 35.71429vw;
-
+  opacity: 1;
 }
-
-
 
 #pac-input {
     background-color: #fafaff;
@@ -77,20 +87,59 @@ code {
     width: 400px;
 }
 
+
+/* CLINIC INFO */
+.clinic_information {
+  color: #6d8ea0;
+}
+
+.clinic-name {
+  font-weight: 500;
+  color: #192a51;
+  font-family: 'Raleway', sans-serif;
+}
+
+.phone {
+  font-size: smaller;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+}
+
+.address {
+  font-size: smaller;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+}
+
+.hours {
+  font-size: smaller;
+  font-weight: 200;
+  font-family: 'Raleway', sans-serif;
+}
+
+.website {
+  color: #6d8ea0;
+  font-family: 'Raleway', sans-serif;
+}
+
+fieldset {
+  font-size: smaller;
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+}
+
 ul {
-  /* list-style-type: none; */
+  list-style-type: none;
   margin: 0;
   padding-left: 0px;
-  /* height: 271px auto; */
-  /* width: 500px; */
-  /* overflow-y: scroll; */
+  height: 271px auto;
+  overflow-y: scroll;
 }
 
 li {
-  /* background-color: #f1f1f1; */
   padding: 10px;
-  /* text-overflow: ellipsis; */
-  /* white-space: wrap; */
+  text-overflow: ellipsis;
+  white-space: wrap;
   overflow: scroll;
 }
 
@@ -112,45 +161,16 @@ li:nth-child(odd) {
   border-color: #6d8ea0;
 }
 
+.leave-review-btn:focus {
+  color: #6d8ea0;
+  background-color: #fafaff;
+  border-color: #6d8ea0;
+}
+
 .view-review-btn {
-    display: block;
-    color: #fafaff;
-    background-color: #6d8ea0;
-    border-color: #6d8ea0;
-    width: 100%;
-}
-
-
-/* CLINIC INFO */
-.clinic_information {
-  color: #6d8ea0;
-}
-
-.clinic-name {
-  font-weight: 500;
-  color: #192a51;
-}
-
-.phone {
-  font-size: smaller;
-  font-weight: 300;
-}
-
-.address {
-  font-size: smaller;
-  font-weight: 300;
-}
-
-.hours {
-  font-size: smaller;
-  font-weight: 200;
-}
-
-.website {
-  color: #6d8ea0;
-}
-
-fieldset {
-  font-size: smaller;
-  font-weight: 300;
+  display: block;
+  color: #fafaff;
+  background-color: #6d8ea0;
+  border-color: #6d8ea0;
+  width: 100%;
 }

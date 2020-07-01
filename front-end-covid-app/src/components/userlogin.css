@@ -1,15 +1,10 @@
 html {
-    background-image: url(clay-banks-e6pK_snssSY-unsplash.jpg);
-    background-position: center;
-    opacity: 0.85;
-    background-size: cover;
+    
 }
 
 
 .container-login {
-
     text-align: center;
-
 }
 
 .container-signup {
@@ -21,6 +16,7 @@ h1 {
     display: flex;
     flex-direction: column;
     text-align: center;
+    font-family: 'Raleway', sans-serif;
 }
 
 
@@ -38,6 +34,7 @@ form {
 label {
 
     text-align: left;
+    font-family: 'Raleway', sans-serif;
 
 }
 
@@ -60,6 +57,7 @@ input {
     border-radius: 4px;
     margin-bottom: 20px;
     transition: all 250ms ease-in-out;
+    font-family: 'Raleway', sans-serif;
 
 }
 
