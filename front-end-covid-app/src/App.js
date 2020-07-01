@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import GoogleMap from './components/GoogleMap';
 import SignUp from './components/SignUp';
-import NavBar from './components/NavBar';
 import UserLogin from './components/UserLogin';
 
 class App extends Component {
@@ -14,7 +13,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="container-app">
-          {/* <NavBar /> */}
             <Route exact path="/login" component={UserLogin} />
             <Switch>
               <Route exact path="/" component={GoogleMap} />

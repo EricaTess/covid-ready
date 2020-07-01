@@ -146,16 +146,12 @@ li {
   background-color: #fafaff;
 }
 
-/* li:nth-child(odd) {
-  background-color: #fafaff;
-} */
-
 .btn-primary .leave-review-btn {
   display: block;
   color: #fafaff;
   background-color: #6d8ea0;
   border-color: #6d8ea0;
-  width: 100%;
+  width: 50%;
 }
 
 .leave-review-btn:hover {
@@ -175,12 +171,11 @@ li {
   color: #fafaff;
   background-color: #6d8ea0;
   border-color: #6d8ea0;
-  width: 100%;
+  width: 50%;
 }
 
 
 /* User Login and Registration */
-
 
 .container-login {
   text-align: center;
