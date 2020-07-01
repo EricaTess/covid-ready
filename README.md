@@ -51,7 +51,7 @@ $ source env/bin/activate
 ```
 Install dependencies:
 ```
-$ pip3 install -r requirements.txt
+(env) $ pip3 install -r requirements.txt
 ```
 Start server:
 ```
