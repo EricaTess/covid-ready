@@ -145,6 +145,7 @@ li {
   background-color: #fafaff;
 }
 
+
 .btn-primary .leave-review-btn {
   display: block;
   color: #fafaff;
@@ -152,6 +153,7 @@ li {
   border-color: #6d8ea0;
   width: 50%;
 }
+
 
 .leave-review-btn:hover {
   color: #6d8ea0;

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Rating } from '@material-ui/lab';
-import { Divider } from '@material-ui/core';
 
 import Reviews from './Reviews';
 import Ratings from './Ratings';
@@ -70,10 +68,9 @@ export default function ClinicInfo(props) {
                 value={value}
                 readOnly
             />
-            <button className="btn btn-lg btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Rate Clinic</button>
-            <button className="btn btn-lg btn-primary btn-block view-review-btn" onClick={displayReviews}>View Reviews</button>
+            <button className="btn btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Rate Clinic</button>
+            <button className="btn btn-primary btn-block view-review-btn" onClick={displayReviews}>View Reviews</button>
             </Box>
-            {/* <Divider variant="middle"/> */}
             {leaveReview}
             {showReviews}
         </div> 

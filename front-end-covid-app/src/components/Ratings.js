@@ -12,7 +12,7 @@ export default function Ratings(props) {
     const [sixFtScore, setSixFtScore] = useState('')
     const [gloveScore, setGloveScore] = useState('')
     const [textReview, setTextReview] = useState('')
-    const [reviews, setReviews] = useState([])
+
 
     const handleOverallRating = (event) => {
         event.preventDefault()
@@ -72,14 +72,8 @@ export default function Ratings(props) {
           .then(res => {
               console.log(res);
             });
-
-        setOverallScore('')
-        setMaskScore('')
-        setCleanScore('')
-        setSixFtScore('')
-        setGloveScore('')
-        setTextReview('')
     }
+
 
   return (
     <div className="rating-form">
@@ -115,7 +109,7 @@ export default function Ratings(props) {
                 defaultValue={"Leave a Review"}
                 variant="outlined" 
                 onChange={handleTextReview}/><br/>
-            <button className="btn btn-lg btn-primary btn-block" 
+            <button className="btn btn-primary btn-block" 
                     onClick={handleSubmit}>Submit Review</button>
     </div>
   );

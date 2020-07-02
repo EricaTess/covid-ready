@@ -6,7 +6,7 @@ export default function Reviews(props) {
 
     const [reviews, setReviews] = useState([])
 
-    useEffect(() => {
+    useEffect((props) => {
         fetch('/ratings-by-clinic', {
             method: 'POST',
             headers:{
@@ -37,7 +37,6 @@ export default function Reviews(props) {
             )
         }
         reviews.map((review) => {
-            console.log(JSON.stringify(review))
             jsx.push(
                 <div>
                     <ul>
