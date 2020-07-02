@@ -175,6 +175,18 @@ li {
   width: 50%;
 }
 
+.view-review-btn:hover {
+  color: #6d8ea0;
+  background-color: #fafaff;
+  border-color: #6d8ea0;
+}
+
+.view-review-btn:focus {
+  color: #6d8ea0;
+  background-color: #fafaff;
+  border-color: #6d8ea0;
+}
+
 
 /* User Login and Registration */
 

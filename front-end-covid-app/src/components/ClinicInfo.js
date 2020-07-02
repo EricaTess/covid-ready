@@ -56,8 +56,8 @@ export default function ClinicInfo(props) {
     return (
         <div className="clinic-information" id={"clinic|".concat(props.place_id)}>
             <p className="clinic-name">{props.name}</p>
-            <p className="phone">{props.phone}</p>
             <p className="address">{props.address}</p>
+            <p className="phone">{props.phone}</p>
             <p className="hours">{layoutHours()}</p>
             <a className="website" href={props.website}>Website</a>
             <Box component="fieldset" mb={3} borderColor="transparent">
