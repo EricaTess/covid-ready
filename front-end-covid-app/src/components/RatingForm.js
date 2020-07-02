@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 export default function RatingForm(props) {
 
     return (
-        <div>
+        <div className="rating-form">
             <Typography component="legend">Overall Score</Typography>
             <Rating
                 name={"overall-score|".concat(props.place_id)}

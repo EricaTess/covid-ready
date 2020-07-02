@@ -209,6 +209,14 @@ form {
 
 }
 
+legend {
+  color: #192a51;
+}
+
+span {
+  color: #192a51;
+}
+
 label {
 
   text-align: left;
@@ -222,6 +230,10 @@ label {
   display: flex;
   flex-direction: column;
 
+}
+
+.rating-form {
+  color: #192a51;
 }
 
 input {

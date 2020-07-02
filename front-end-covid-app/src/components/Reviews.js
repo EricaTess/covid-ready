@@ -6,7 +6,7 @@ export default function Reviews(props) {
 
     const [reviews, setReviews] = useState([])
 
-    useEffect((props) => {
+    useEffect(() => {
         fetch('/ratings-by-clinic', {
             method: 'POST',
             headers:{
