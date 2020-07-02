@@ -187,12 +187,14 @@ li {
   text-align: center;
 }
 
+
 h1 {
 
   display: flex;
   flex-direction: column;
   text-align: center;
   font-family: 'Raleway', sans-serif;
+  color: #192a51;
 }
 
 
@@ -211,6 +213,7 @@ label {
 
   text-align: left;
   font-family: 'Raleway', sans-serif;
+  color: #192a51;
 
 }
 

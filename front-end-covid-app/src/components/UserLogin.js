@@ -67,7 +67,7 @@ export default class UserLogin extends Component {
               <div className="logo">
               </div>
                 <form noValidate onSubmit={this.onSubmit}>
-                  <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+                  <h1 className="h3 mb-3 font-weight-normal login-text">Login</h1>
                     <div className="form-group">
                         <label htmlFor="email">Email address</label>
                         <input
