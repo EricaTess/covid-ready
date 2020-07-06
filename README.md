@@ -3,7 +3,7 @@
 ## Summary
 COVID Ready is a crowd sourced application that allows patients to 
 rate clinics based on COVID readiness. Patients are given the opportunity 
-to review the clinics ratings and seek care based off their needs.
+to review the clinic ratings and seek care based off their needs.
 
 ## Table of Contents
 
