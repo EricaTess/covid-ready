@@ -191,14 +191,9 @@ export default class GoogleMap extends Component {
 
   render() {
 
-    
     // If user ID is not in local storage, direct to login page
     if (localStorage.length === 0) {
-        this.setState({redirect: '/login'})
-    }
-
-    if (this.state.redirect) {
-        return <Redirect to={this.state.redirect} />
+      return <Redirect to={'/login'} />
     }
 
     const clinicInfo = this.state.clinics.map((place) => {

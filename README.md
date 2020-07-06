@@ -41,23 +41,29 @@ Clone repository:
 ```
 $ git clone https://github.com/EricaTess/covid-ready.git
 ```
-Create a virtual environment:
+Create and activate a virtual environment:
 ```
 $ virtualenv env
-```
-Activate the virtual environment:
-```
 $ source env/bin/activate
 ```
 Install dependencies:
 ```
 (env) $ pip3 install -r requirements.txt
 ```
+Create database `covid_rating`:
+```
+$ createdb covid_rating
+```
+Create database tables:
+```
+$ python3 -i model.py
+>>> db.create_all()
+```
 Start server:
 ```
 (env) $ python3 server.py
 ```
-Navigate to front-end-covid-app folder in another terminal window:
+In the terminal, navigate to front-end-covid-app folder:
 ```
 $ npm start
 ```

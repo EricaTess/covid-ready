@@ -65,7 +65,7 @@ export default function ClinicInfo(props) {
             <Rating
                 name={"overall-score|".concat(props.place_id)}
                 precision={.1}
-                value={value}
+                value={4.45}
                 readOnly
             />
             <button className="btn btn-primary btn-block leave-review-btn" onClick={displayReviewForm}>Rate Clinic</button>
