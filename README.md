@@ -68,7 +68,8 @@ In the terminal, navigate to front-end-covid-app folder:
 $ npm start
 ```
 
-Get your own Google Maps/Place API key at [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key)
+Get your own Google Maps/Place API key at [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key) and replace the API key in 'GoogleMap.js' component in the componentDidMount() method.
+
 
 ## <a name="about"></a>About the Developer
 
