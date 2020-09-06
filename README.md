@@ -33,11 +33,17 @@ Search clinics by city and review
 - Python 3.7.3
 - Google Maps/Places API key
 
+Get your own Google Maps/Place API key at [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key) and replace the API key in 'GoogleMap.js' component in the componentDidMount() method.
+
 To have this app running on your local computer, please follow the below steps:
 
 Clone repository:
 ```
 $ git clone https://github.com/EricaTess/covid-ready.git
+```
+Navigate to repo:
+```
+$ cd covid-ready
 ```
 Create and activate a virtual environment:
 ```
@@ -50,23 +56,26 @@ Install dependencies:
 ```
 Create database `covid_rating`:
 ```
-$ createdb covid_rating
+(env) $ createdb covid_rating
 ```
 Create database tables:
 ```
-$ python3 -i model.py
+(env) $ python3 -i model.py
 >>> db.create_all()
 ```
 Start server:
 ```
 (env) $ python3 server.py
 ```
-In the terminal, navigate to front-end-covid-app folder:
+In a separate terminal window, navigate to front-end-covid-app folder:
+Install dependencies:
+```
+$ npm install
+```
+Start App!
 ```
 $ npm start
 ```
-
-Get your own Google Maps/Place API key at [Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key) and replace the API key in 'GoogleMap.js' component in the componentDidMount() method.
 
 
 ## <a name="about"></a>About the Developer
