@@ -83,4 +83,4 @@ def get_rating_by_clinic(place_id):
 
 if __name__ == '__main__':
     from server import app
-    connect_to_db(app)
+    connect_to_db(app, echo=False)
